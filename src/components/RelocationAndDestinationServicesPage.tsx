@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import type { MouseEvent, WheelEvent } from "react";
 import { useState } from "react";
 import { Container } from "./Container";
 import { ConnectWithUsSection } from "./ConnectWithUsForm";
@@ -96,6 +97,46 @@ const faqs = [
 export function RelocationAndDestinationServicesPage() {
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
 
+  const onProcessWheel = (e: WheelEvent<HTMLDivElement>) => {
+    if (window.innerWidth <= 768) return;
+    if (e.deltaY <= 0) return; // horizontal lock only while scrolling down
+
+    const target = e.currentTarget.querySelector<HTMLElement>(".horizontal-process-wrapper");
+    if (!target) return;
+
+    const maxScroll = target.scrollWidth - target.clientWidth;
+    if (maxScroll <= 0) return;
+    if (target.scrollLeft >= maxScroll) return;
+
+    e.preventDefault();
+    const card = target.querySelector<HTMLElement>(".process-item");
+    const row = target.querySelector<HTMLElement>(".process-row");
+    const gapStr = row ? window.getComputedStyle(row).gap : "0px";
+    const gap = Number.parseFloat(gapStr || "0") || 0;
+    const step = card ? card.getBoundingClientRect().width + gap : 220;
+    const current = target.scrollLeft;
+    const next = Math.ceil((current + 1) / step) * step;
+    target.scrollLeft = Math.min(maxScroll, next);
+  };
+
+  const onProcessMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (window.innerWidth <= 768) return;
+
+    const target = e.currentTarget.querySelector<HTMLElement>(".horizontal-process-wrapper");
+    if (!target) return;
+
+    const rect = target.getBoundingClientRect();
+    const width = rect.width;
+    if (width <= 0) return;
+
+    const maxScroll = target.scrollWidth - target.clientWidth;
+    if (maxScroll <= 0) return;
+
+    const x = (e.clientX - rect.left) / width;
+    const clamped = Math.min(1, Math.max(0, x));
+    target.scrollLeft = clamped * maxScroll;
+  };
+
   return (
     <main className="service-page service-relocation-and-destination-services flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
       <section className="bg-background">
@@ -123,7 +164,11 @@ export function RelocationAndDestinationServicesPage() {
             <span className="text-[#0B1F2D]">How this </span>
             <span className="text-[#2899E6]">works</span>
           </h2>
-          <div className="process-wrapper mt-10">
+          <div
+            className="process-wrapper mt-10"
+            onWheel={onProcessWheel}
+            onMouseMove={onProcessMouseMove}
+          >
             <div className="horizontal-process-wrapper">
               <div className="process-row">
                 {processSteps.map((step, idx) => (

@@ -148,7 +148,25 @@ export function RecruitmentAndContractorsPage() {
     );
 
     items.forEach((item) => observer.observe(item));
-    return () => observer.disconnect();
+    const onTimelineMouseMove = (e: MouseEvent) => {
+      if (window.innerWidth <= 768) return;
+
+      const rect = root.getBoundingClientRect();
+      const width = rect.width;
+      if (width <= 0) return;
+
+      const maxScroll = root.scrollWidth - root.clientWidth;
+      if (maxScroll <= 0) return;
+
+      const x = (e.clientX - rect.left) / width;
+      const clamped = Math.min(1, Math.max(0, x));
+      root.scrollLeft = clamped * maxScroll;
+    };
+    root.addEventListener("mousemove", onTimelineMouseMove);
+    return () => {
+      observer.disconnect();
+      root.removeEventListener("mousemove", onTimelineMouseMove);
+    };
   }, []);
 
   useEffect(() => {
@@ -186,6 +204,14 @@ export function RecruitmentAndContractorsPage() {
     let isActive = false;
     let reachedEnd = false;
     let lockCompleted = false;
+    const getCardStep = () => {
+      const card = scrollBox.querySelector<HTMLElement>(".card");
+      if (!card) return 220;
+      const inner = scrollBox.querySelector<HTMLElement>(".cards-inner");
+      const gapStr = inner ? window.getComputedStyle(inner).gap : "0px";
+      const gap = Number.parseFloat(gapStr || "0") || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
 
     const checkPosition = () => {
       if (lockCompleted) return;
@@ -209,7 +235,10 @@ export function RecruitmentAndContractorsPage() {
       if (e.deltaY > 0) {
         if (scrollBox.scrollLeft < maxScroll) {
           e.preventDefault();
-          scrollBox.scrollLeft += 220;
+          const step = getCardStep();
+          const current = scrollBox.scrollLeft;
+          const next = Math.ceil((current + 1) / step) * step;
+          scrollBox.scrollLeft = Math.min(maxScroll, next);
           reachedEnd = false;
         } else if (!reachedEnd) {
           e.preventDefault();

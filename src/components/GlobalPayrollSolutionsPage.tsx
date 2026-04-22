@@ -77,17 +77,23 @@ export function GlobalPayrollSolutionsPage() {
     const sectionEl = sectionRef.current;
     const scrollBoxEl = scrollBoxRef.current;
     if (!sectionEl || !scrollBoxEl) return;
+    const getCardStep = () => {
+      const card = scrollBoxEl.querySelector<HTMLElement>(".process-item");
+      if (!card) return 220;
+      const row = scrollBoxEl.querySelector<HTMLElement>(".process-row");
+      const gapStr = row ? window.getComputedStyle(row).gap : "0px";
+      const gap = Number.parseFloat(gapStr || "0") || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
 
     let isActive = false;
     let reachedEnd = false;
-    let reachedStart = false;
 
     const checkPosition = () => {
       const rect = sectionEl.getBoundingClientRect();
       isActive = rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.6;
       if (!isActive) {
         reachedEnd = false;
-        reachedStart = false;
       }
     };
 
@@ -109,32 +115,21 @@ export function GlobalPayrollSolutionsPage() {
     const onWheel = (e: WheelEvent) => {
       if (window.innerWidth <= 768) return;
       if (!isActive) return;
+      if (e.deltaY <= 0) return; // Apply horizontal lock only while moving down
 
       const maxScroll = scrollBoxEl.scrollWidth - scrollBoxEl.clientWidth;
       if (maxScroll <= 0) return;
 
-      // SCROLL RIGHT
-      if (e.deltaY > 0) {
-        if (scrollBoxEl.scrollLeft < maxScroll) {
-          e.preventDefault();
-          scrollBoxEl.scrollLeft += 220;
-          reachedEnd = false;
-        } else if (!reachedEnd) {
-          e.preventDefault();
-          reachedEnd = true;
-        }
-      }
-
-      // SCROLL LEFT
-      if (e.deltaY < 0) {
-        if (scrollBoxEl.scrollLeft > 0) {
-          e.preventDefault();
-          scrollBoxEl.scrollLeft -= 220;
-          reachedStart = false;
-        } else if (!reachedStart) {
-          e.preventDefault();
-          reachedStart = true;
-        }
+      if (scrollBoxEl.scrollLeft < maxScroll) {
+        e.preventDefault();
+        const step = getCardStep();
+        const current = scrollBoxEl.scrollLeft;
+        const next = Math.ceil((current + 1) / step) * step;
+        scrollBoxEl.scrollLeft = Math.min(maxScroll, next);
+        reachedEnd = false;
+      } else if (!reachedEnd) {
+        e.preventDefault();
+        reachedEnd = true;
       }
     };
 

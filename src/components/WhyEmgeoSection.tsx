@@ -48,8 +48,10 @@ export function WhyEmgeoSection() {
     const row = rowRef.current;
     if (!row) return;
 
+    const isMobileView = () => window.matchMedia("(max-width: 768px)").matches;
+
     const onWheel = (e: WheelEvent) => {
-      if (window.matchMedia("(max-width: 768px)").matches) {
+      if (isMobileView()) {
         return;
       }
 
@@ -60,6 +62,10 @@ export function WhyEmgeoSection() {
 
       const dy = e.deltaY;
       const dx = e.deltaX;
+      const firstCard = row.querySelector<HTMLElement>(".emgeo-card");
+      const gapStr = window.getComputedStyle(row).gap || "0px";
+      const gap = Number.parseFloat(gapStr.replace("px", "")) || 0;
+      const step = firstCard ? firstCard.getBoundingClientRect().width + gap : 220;
 
       if (Math.abs(dx) > Math.abs(dy)) {
         return;
@@ -67,17 +73,40 @@ export function WhyEmgeoSection() {
 
       if (dy > 0 && !atEnd) {
         e.preventDefault();
-        row.scrollLeft += dy;
+        const current = row.scrollLeft;
+        const next = Math.ceil((current + 1) / step) * step;
+        row.scrollLeft = Math.min(scrollWidth - clientWidth, next);
         return;
       }
       if (dy < 0 && !atStart) {
         e.preventDefault();
-        row.scrollLeft += dy;
+        const current = row.scrollLeft;
+        const prev = Math.floor((current - 1) / step) * step;
+        row.scrollLeft = Math.max(0, prev);
       }
     };
 
+    const onMouseMove = (e: MouseEvent) => {
+      if (isMobileView()) return;
+
+      const maxScroll = row.scrollWidth - row.clientWidth;
+      if (maxScroll <= 0) return;
+
+      const rect = row.getBoundingClientRect();
+      if (rect.width <= 0) return;
+
+      const x = (e.clientX - rect.left) / rect.width;
+      const clamped = Math.min(1, Math.max(0, x));
+      const boosted = Math.pow(clamped, 1.1);
+      row.scrollLeft = boosted * maxScroll;
+    };
+
     row.addEventListener("wheel", onWheel, { passive: false });
-    return () => row.removeEventListener("wheel", onWheel);
+    row.addEventListener("mousemove", onMouseMove);
+    return () => {
+      row.removeEventListener("wheel", onWheel);
+      row.removeEventListener("mousemove", onMouseMove);
+    };
   }, []);
 
   return (

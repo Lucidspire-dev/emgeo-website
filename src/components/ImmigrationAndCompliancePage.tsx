@@ -117,8 +117,15 @@ export function ImmigrationAndCompliancePage() {
 
     let isActive = false;
     let reachedEnd = false;
-    let reachedStart = false;
     let lockCompleted = false;
+    const getCardStep = () => {
+      const card = section.querySelector<HTMLElement>(".imm-card");
+      if (!card) return 60;
+      const row = section.querySelector<HTMLElement>(".imm-cards-wrapper");
+      const gapStr = row ? window.getComputedStyle(row).gap : "0px";
+      const gap = Number.parseFloat(gapStr || "0") || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
 
     const checkPosition = () => {
       if (lockCompleted) return;
@@ -131,47 +138,56 @@ export function ImmigrationAndCompliancePage() {
       } else {
         isActive = false;
         reachedEnd = false;
-        reachedStart = false;
       }
     };
 
     const onWheel = (e: WheelEvent) => {
       if (window.innerWidth <= 768) return;
       if (!isActive || lockCompleted) return;
+      if (e.deltaY <= 0) return; // lock horizontal only while scrolling down
 
       const maxScroll = section.scrollWidth - section.clientWidth;
-      if (e.deltaY > 0) {
-        if (section.scrollLeft < maxScroll) {
-          e.preventDefault();
-          section.scrollLeft += 60;
-          reachedEnd = false;
-        } else if (!reachedEnd) {
-          e.preventDefault();
-          reachedEnd = true;
-        } else {
-          lockCompleted = true;
-          isActive = false;
-        }
-      } else if (e.deltaY < 0) {
-        if (section.scrollLeft > 0) {
-          e.preventDefault();
-          section.scrollLeft -= 60;
-          reachedStart = false;
-        } else if (!reachedStart) {
-          e.preventDefault();
-          reachedStart = true;
-        }
+      if (section.scrollLeft < maxScroll) {
+        e.preventDefault();
+        const step = getCardStep();
+        const current = section.scrollLeft;
+        const next = Math.ceil((current + 1) / step) * step;
+        section.scrollLeft = Math.min(maxScroll, next);
+        reachedEnd = false;
+      } else if (!reachedEnd) {
+        e.preventDefault();
+        reachedEnd = true;
+      } else {
+        lockCompleted = true;
+        isActive = false;
       }
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (window.innerWidth <= 768) return;
+
+      const rect = section.getBoundingClientRect();
+      const width = rect.width;
+      if (width <= 0) return;
+
+      const maxScroll = section.scrollWidth - section.clientWidth;
+      if (maxScroll <= 0) return;
+
+      const x = (e.clientX - rect.left) / width;
+      const clamped = Math.min(1, Math.max(0, x));
+      section.scrollLeft = clamped * maxScroll;
     };
 
     window.addEventListener("scroll", checkPosition, { passive: true });
     window.addEventListener("wheel", onWheel, { passive: false });
+    section.addEventListener("mousemove", onMouseMove);
     checkPosition();
 
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", checkPosition);
       window.removeEventListener("wheel", onWheel);
+      section.removeEventListener("mousemove", onMouseMove);
     };
   }, []);
 

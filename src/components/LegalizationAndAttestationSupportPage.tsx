@@ -97,7 +97,14 @@ export function LegalizationAndAttestationSupportPage() {
 
     let isActive = false;
     let reachedEnd = false;
-    let reachedStart = false;
+    const getProcessStep = () => {
+      const card = wrapper.querySelector<HTMLElement>(".legal-process-item");
+      if (!card) return 220;
+      const row = wrapper.querySelector<HTMLElement>(".legal-process-row");
+      const gapStr = row ? window.getComputedStyle(row).gap : "0px";
+      const gap = Number.parseFloat(gapStr || "0") || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
 
     const checkPosition = () => {
       const rect = wrapper.getBoundingClientRect();
@@ -106,35 +113,27 @@ export function LegalizationAndAttestationSupportPage() {
       } else {
         isActive = false;
         reachedEnd = false;
-        reachedStart = false;
       }
     };
 
     const onWheel = (e: WheelEvent) => {
       if (window.innerWidth <= 1024) return;
       if (!isActive) return;
+      if (e.deltaY <= 0) return; // lock horizontal only while scrolling down
 
       const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
-      if (e.deltaY > 0) {
-        if (wrapper.scrollLeft < maxScroll) {
-          e.preventDefault();
-          wrapper.scrollLeft += 220;
-          reachedEnd = false;
-        } else if (!reachedEnd) {
-          e.preventDefault();
-          reachedEnd = true;
-        } else {
-          isActive = false;
-        }
-      } else if (e.deltaY < 0) {
-        if (wrapper.scrollLeft > 0) {
-          e.preventDefault();
-          wrapper.scrollLeft -= 220;
-          reachedStart = false;
-        } else if (!reachedStart) {
-          e.preventDefault();
-          reachedStart = true;
-        }
+      if (wrapper.scrollLeft < maxScroll) {
+        e.preventDefault();
+        const step = getProcessStep();
+        const current = wrapper.scrollLeft;
+        const next = Math.ceil((current + 1) / step) * step;
+        wrapper.scrollLeft = Math.min(maxScroll, next);
+        reachedEnd = false;
+      } else if (!reachedEnd) {
+        e.preventDefault();
+        reachedEnd = true;
+      } else {
+        isActive = false;
       }
     };
 
@@ -173,7 +172,75 @@ export function LegalizationAndAttestationSupportPage() {
       });
     }, { threshold: 0.2 });
     cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
+
+    let isActive = false;
+    let reachedEnd = false;
+    const getHelpsStep = () => {
+      const card = section.querySelector<HTMLElement>(".legal-card");
+      if (!card) return 220;
+      const row = section.querySelector<HTMLElement>(".legal-cards-wrapper");
+      const gapStr = row ? window.getComputedStyle(row).gap : "0px";
+      const gap = Number.parseFloat(gapStr || "0") || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    const checkPosition = () => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.6) {
+        isActive = true;
+      } else {
+        isActive = false;
+        reachedEnd = false;
+      }
+    };
+
+    const onWheel = (e: WheelEvent) => {
+      if (window.innerWidth <= 768) return;
+      if (!isActive) return;
+      if (e.deltaY <= 0) return; // lock only while scrolling down
+
+      const maxScroll = section.scrollWidth - section.clientWidth;
+      if (maxScroll <= 0) return;
+
+      if (section.scrollLeft < maxScroll) {
+        e.preventDefault();
+        const step = getHelpsStep();
+        const current = section.scrollLeft;
+        const next = Math.ceil((current + 1) / step) * step;
+        section.scrollLeft = Math.min(maxScroll, next);
+        reachedEnd = false;
+      } else if (!reachedEnd) {
+        e.preventDefault();
+        reachedEnd = true;
+      }
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (window.innerWidth <= 768) return;
+
+      const rect = section.getBoundingClientRect();
+      const width = rect.width;
+      if (width <= 0) return;
+
+      const maxScroll = section.scrollWidth - section.clientWidth;
+      if (maxScroll <= 0) return;
+
+      const x = (e.clientX - rect.left) / width;
+      const clamped = Math.min(1, Math.max(0, x));
+      section.scrollLeft = clamped * maxScroll;
+    };
+
+    window.addEventListener("scroll", checkPosition, { passive: true });
+    window.addEventListener("wheel", onWheel, { passive: false });
+    section.addEventListener("mousemove", onMouseMove);
+    checkPosition();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", checkPosition);
+      window.removeEventListener("wheel", onWheel);
+      section.removeEventListener("mousemove", onMouseMove);
+    };
   }, []);
 
   return (
@@ -238,7 +305,10 @@ export function LegalizationAndAttestationSupportPage() {
           </h2>
         </div>
 
-        <div ref={cardsRef} className="legal-cards-section">
+        <div
+          ref={cardsRef}
+          className="legal-cards-section"
+        >
           <div className="legal-cards-wrapper">
             {helpsCards.map((card) => (
               <article key={card.title} className="legal-card">

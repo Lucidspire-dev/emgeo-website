@@ -196,7 +196,7 @@ export function HeroSection({
                         />
                       </div>
                       <span className="flex h-[14px] w-[8px] items-center justify-center font-['Plus_Jakarta_Sans'] text-[12px] leading-[120%] font-semibold">
-                        4
+                        {slides.length}
                       </span>
                     </div>
                     <button

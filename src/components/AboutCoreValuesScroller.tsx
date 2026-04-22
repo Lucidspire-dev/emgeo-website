@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import type { WheelEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CARDS = [
   {
@@ -32,6 +33,7 @@ const CARDS = [
 
 export function AboutCoreValuesScroller() {
   const [parallaxScroll, setParallaxScroll] = useState(false);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
@@ -41,9 +43,72 @@ export function AboutCoreValuesScroller() {
     return () => mq.removeEventListener("change", sync);
   }, []);
 
+  const getStep = (el: HTMLDivElement) => {
+    const card = el.querySelector<HTMLElement>(".about-card");
+    const row = el.querySelector<HTMLElement>(".about-cards-wrapper");
+    const gapStr = row ? window.getComputedStyle(row).gap : "0px";
+    const gap = Number.parseFloat(gapStr || "0") || 0;
+    return card ? card.getBoundingClientRect().width + gap : 220;
+  };
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let isActive = false;
+
+    const checkPosition = () => {
+      const rect = section.getBoundingClientRect();
+      isActive = rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.6;
+    };
+
+    const onWheel = (e: globalThis.WheelEvent) => {
+      if (!parallaxScroll) return;
+      if (!isActive) return;
+      if (e.deltaY <= 0) return; // same down-scroll-only lock behavior
+
+      const maxScroll = section.scrollWidth - section.clientWidth;
+      if (maxScroll <= 0) return;
+      if (section.scrollLeft >= maxScroll) return;
+
+      e.preventDefault();
+      const step = getStep(section);
+      const current = section.scrollLeft;
+      const next = Math.ceil((current + 1) / step) * step;
+      section.scrollLeft = Math.min(maxScroll, next);
+    };
+
+    window.addEventListener("scroll", checkPosition, { passive: true });
+    window.addEventListener("wheel", onWheel, { passive: false });
+    checkPosition();
+
+    return () => {
+      window.removeEventListener("scroll", checkPosition);
+      window.removeEventListener("wheel", onWheel);
+    };
+  }, [parallaxScroll]);
+
+  const onWheelDownLock = (e: WheelEvent<HTMLDivElement>) => {
+    if (!parallaxScroll) return;
+    if (e.deltaY <= 0) return;
+
+    const el = e.currentTarget;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) return;
+    if (el.scrollLeft >= maxScroll) return;
+
+    e.preventDefault();
+    const step = getStep(el);
+    const current = el.scrollLeft;
+    const next = Math.ceil((current + 1) / step) * step;
+    el.scrollLeft = Math.min(maxScroll, next);
+  };
+
   return (
     <div
+      ref={sectionRef}
       className="about-cards-section"
+      onWheel={onWheelDownLock}
       onMouseMove={
         parallaxScroll
           ? (e) => {
