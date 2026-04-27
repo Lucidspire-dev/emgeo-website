@@ -35,12 +35,12 @@ export function SiteHeader() {
 
   const submenuServices = useMemo(() => {
     const slugsInOrder = [
-      "global-payroll-solutions",
       "employer-of-record",
-      "recruitment-and-contractors",
       "immigration-and-compliance",
-      "relocation-and-destination-services",
+      "global-payroll-solutions",
+      "recruitment-and-contractors",
       "legalization-and-attestation-support",
+      "relocation-and-destination-services",
     ];
 
     const bySlug = new Map(services.map((s) => [s.slug, s]));

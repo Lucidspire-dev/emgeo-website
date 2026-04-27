@@ -6,22 +6,10 @@ import { useEffect, useRef, useState } from "react";
 
 const servicePanels = [
   {
-    title: "Global Payroll Solutions",
-    description:
-      "Eliminate payroll complexity with Emgeo's global payroll services. We ensure accurate, compliant, multi-currency salary processing, automate taxes, and reduce payroll errors, enabling enterprises to focus on growth while we manage workforce payments seamlessly.",
-    href: "/services/global-payroll-solutions",
-  },
-  {
     title: "Employer of Record (EoR)",
     description:
       "Expand globally without legal entities. Emgeo's Employer of Record solutions handle hiring, onboarding, compliance, and payroll, empowering enterprises to build international teams quickly, compliantly, and cost-effectively across 160+ countries.",
     href: "/services/employer-of-record",
-  },
-  {
-    title: "Recruitment & Contractors",
-    description:
-      "Overcome talent shortages and project delays. Emgeo connects enterprises with pre-vetted global professionals and contractors, delivering skilled teams in weeks, ensuring flexibility, scalability, and alignment with critical business requirements worldwide.",
-    href: "/services/recruitment-and-contractors",
   },
   {
     title: "Immigration and Compliance",
@@ -30,16 +18,28 @@ const servicePanels = [
     href: "/services/immigration-and-compliance",
   },
   {
-    title: "Relocation and Destination Services",
+    title: "Global Payroll Solutions",
     description:
-      "Expand globally without legal entities. Emgeo's Employer of Record solutions handle hiring, onboarding, compliance, and payroll, empowering enterprises to build international teams quickly, compliantly, and cost-effectively across 160+ countries.",
-    href: "/services/relocation-and-destination-services",
+      "Eliminate payroll complexity with Emgeo's global payroll services. We ensure accurate, compliant, multi-currency salary processing, automate taxes, and reduce payroll errors, enabling enterprises to focus on growth while we manage workforce payments seamlessly.",
+    href: "/services/global-payroll-solutions",
+  },
+  {
+    title: "Recruitment & Contractors",
+    description:
+      "Overcome talent shortages and project delays. Emgeo connects enterprises with pre-vetted global professionals and contractors, delivering skilled teams in weeks, ensuring flexibility, scalability, and alignment with critical business requirements worldwide.",
+    href: "/services/recruitment-and-contractors",
   },
   {
     title: "Legalization and Attestation Support",
     description:
       "Expand globally without legal entities. Emgeo's Employer of Record solutions handle hiring, onboarding, compliance, and payroll, empowering enterprises to build international teams quickly, compliantly, and cost-effectively across 160+ countries.",
     href: "/services/legalization-and-attestation-support",
+  },
+  {
+    title: "Relocation and Destination Services",
+    description:
+      "Expand globally without legal entities. Emgeo's Employer of Record solutions handle hiring, onboarding, compliance, and payroll, empowering enterprises to build international teams quickly, compliantly, and cost-effectively across 160+ countries.",
+    href: "/services/relocation-and-destination-services",
   },
 ];
 

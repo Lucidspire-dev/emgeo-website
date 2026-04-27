@@ -4,18 +4,18 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 
 const SERVICES_LINKS: { href: string; label: string }[] = [
+  { href: "/services/employer-of-record", label: "Employer of Record" },
+  { href: "/services/immigration-and-compliance", label: "Immigration & Compliance" },
   { href: "/services/global-payroll-solutions", label: "Global Payroll Solutions" },
-  { href: "/services", label: "Employer of Record" },
-  { href: "/services", label: "Recruitment & Contractors" },
-  { href: "/services", label: "Immigration & Compliance" },
-  { href: "/services", label: "Relocation & Destination" },
-  { href: "/services", label: "Legalization & Attestation" },
+  { href: "/services/recruitment-and-contractors", label: "Recruitment & Contractors" },
+  { href: "/services/legalization-and-attestation-support", label: "Legalization & Attestation" },
+  { href: "/services/relocation-and-destination-services", label: "Relocation & Destination" },
 ];
 
 const ABOUT_LINKS: { href: string; label: string }[] = [
   { href: "/about", label: "Vision" },
-  { href: "/about", label: "Team" },
-  { href: "/about#testimonials", label: "Testimonials" },
+  { href: "/about#our-leadership", label: "Team" },
+  { href: "/#testimonials", label: "Testimonials" },
 ];
 
 function ServicesLinkList() {
