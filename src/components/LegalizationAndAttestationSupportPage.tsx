@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Container } from "./Container";
 import { ConnectWithUsSection } from "./ConnectWithUsForm";
 import { FaqSectionTitle } from "./FaqSectionTitle";
+import { HowItWorksAccordion } from "./HowItWorksAccordion";
+import { ServiceHelpsYouSection } from "./ServiceHelpsYouSection";
 
 const HERO_IMAGE = "https://emgeo.lucidspire.com/wp-content/uploads/2026/02/h3.png";
 
@@ -88,160 +90,6 @@ const faqs = [
 
 export function LegalizationAndAttestationSupportPage() {
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
-  const processRef = useRef<HTMLDivElement | null>(null);
-  const cardsRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const wrapper = processRef.current;
-    if (!wrapper) return;
-
-    let isActive = false;
-    let reachedEnd = false;
-    const getProcessStep = () => {
-      const card = wrapper.querySelector<HTMLElement>(".legal-process-item");
-      if (!card) return 220;
-      const row = wrapper.querySelector<HTMLElement>(".legal-process-row");
-      const gapStr = row ? window.getComputedStyle(row).gap : "0px";
-      const gap = Number.parseFloat(gapStr || "0") || 0;
-      return card.getBoundingClientRect().width + gap;
-    };
-
-    const checkPosition = () => {
-      const rect = wrapper.getBoundingClientRect();
-      if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.6) {
-        isActive = true;
-      } else {
-        isActive = false;
-        reachedEnd = false;
-      }
-    };
-
-    const onWheel = (e: WheelEvent) => {
-      if (window.innerWidth <= 1024) return;
-      if (!isActive) return;
-      if (e.deltaY <= 0) return; // lock horizontal only while scrolling down
-
-      const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
-      if (wrapper.scrollLeft < maxScroll) {
-        e.preventDefault();
-        const step = getProcessStep();
-        const current = wrapper.scrollLeft;
-        const next = Math.ceil((current + 1) / step) * step;
-        wrapper.scrollLeft = Math.min(maxScroll, next);
-        reachedEnd = false;
-      } else if (!reachedEnd) {
-        e.preventDefault();
-        reachedEnd = true;
-      } else {
-        isActive = false;
-      }
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (window.innerWidth <= 768) return;
-      const rect = wrapper.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const width = rect.width;
-      const scrollAmount = wrapper.scrollWidth - width;
-      const move = Math.pow(mouseX / width, 1.2) * scrollAmount;
-      wrapper.scrollLeft = move;
-    };
-
-    window.addEventListener("scroll", checkPosition, { passive: true });
-    window.addEventListener("wheel", onWheel, { passive: false });
-    wrapper.addEventListener("mousemove", onMouseMove);
-    checkPosition();
-    return () => {
-      window.removeEventListener("scroll", checkPosition);
-      window.removeEventListener("wheel", onWheel);
-      wrapper.removeEventListener("mousemove", onMouseMove);
-    };
-  }, []);
-
-  useEffect(() => {
-    const section = cardsRef.current;
-    if (!section) return;
-    const cards = Array.from(section.querySelectorAll<HTMLElement>(".legal-card"));
-    if (!cards.length) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    }, { threshold: 0.2 });
-    cards.forEach((card) => observer.observe(card));
-
-    let isActive = false;
-    let reachedEnd = false;
-    const getHelpsStep = () => {
-      const card = section.querySelector<HTMLElement>(".legal-card");
-      if (!card) return 220;
-      const row = section.querySelector<HTMLElement>(".legal-cards-wrapper");
-      const gapStr = row ? window.getComputedStyle(row).gap : "0px";
-      const gap = Number.parseFloat(gapStr || "0") || 0;
-      return card.getBoundingClientRect().width + gap;
-    };
-
-    const checkPosition = () => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.6) {
-        isActive = true;
-      } else {
-        isActive = false;
-        reachedEnd = false;
-      }
-    };
-
-    const onWheel = (e: WheelEvent) => {
-      if (window.innerWidth <= 768) return;
-      if (!isActive) return;
-      if (e.deltaY <= 0) return; // lock only while scrolling down
-
-      const maxScroll = section.scrollWidth - section.clientWidth;
-      if (maxScroll <= 0) return;
-
-      if (section.scrollLeft < maxScroll) {
-        e.preventDefault();
-        const step = getHelpsStep();
-        const current = section.scrollLeft;
-        const next = Math.ceil((current + 1) / step) * step;
-        section.scrollLeft = Math.min(maxScroll, next);
-        reachedEnd = false;
-      } else if (!reachedEnd) {
-        e.preventDefault();
-        reachedEnd = true;
-      }
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (window.innerWidth <= 768) return;
-
-      const rect = section.getBoundingClientRect();
-      const width = rect.width;
-      if (width <= 0) return;
-
-      const maxScroll = section.scrollWidth - section.clientWidth;
-      if (maxScroll <= 0) return;
-
-      const x = (e.clientX - rect.left) / width;
-      const clamped = Math.min(1, Math.max(0, x));
-      section.scrollLeft = clamped * maxScroll;
-    };
-
-    window.addEventListener("scroll", checkPosition, { passive: true });
-    window.addEventListener("wheel", onWheel, { passive: false });
-    section.addEventListener("mousemove", onMouseMove);
-    checkPosition();
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", checkPosition);
-      window.removeEventListener("wheel", onWheel);
-      section.removeEventListener("mousemove", onMouseMove);
-    };
-  }, []);
 
   return (
     <main className="service-page service-legalization-and-attestation-support flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
@@ -275,58 +123,16 @@ export function LegalizationAndAttestationSupportPage() {
         <div className="mx-auto w-full px-4 pb-8 pt-0 sm:px-6 sm:pb-10 lg:px-8">
           <h2 className="text-center align-middle font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] [leading-trim:none] sm:text-[52px] lg:text-[64px] max-md:text-[28px] max-md:leading-[1.3]">
             <span className="text-[#0B1F2D]">How this </span>
-            <span className="text-[#2899E6]">works</span>
+            <span className="text-[#2899E6]">Works</span>
           </h2>
-
-          <div ref={processRef} className="legal-process-wrapper mt-2">
-            <div className="legal-process-row">
-              {processSteps.map((step, idx) => (
-                <div key={step.title} className={`legal-process-item legal-card-${idx + 1}`}>
-                  <div className="legal-process-number"><span>{idx + 1}</span></div>
-                  <div className="legal-process-card">
-                    <h2>{step.title}</h2>
-                    <p>{step.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <HowItWorksAccordion steps={processSteps} wrapperClassName="mt-2 sm:mt-4 lg:mt-6" />
         </div>
       </section>
 
-      <section
-        className="bg-background overflow-x-hidden"
-        aria-labelledby="legal-helps-heading"
-      >
-        <div className="mx-auto w-full px-4 pt-6 pb-8 sm:px-6 sm:pt-8 sm:pb-10 lg:px-8 lg:pt-10">
-          <h2 id="legal-helps-heading" className="text-center align-middle font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] [leading-trim:none] sm:text-[52px] lg:text-[64px] max-md:text-[28px] max-md:leading-[1.3]">
-            <span className="text-[#0B1F2D]">How This Service </span>
-            <span className="text-[#2899E6]">Helps You</span>
-          </h2>
-        </div>
-
-        <div
-          ref={cardsRef}
-          className="legal-cards-section"
-        >
-          <div className="legal-cards-wrapper">
-            {helpsCards.map((card) => (
-              <article key={card.title} className="legal-card">
-                <svg viewBox="0 0 500 410" aria-hidden>
-                  <path d="M420 56C420 69.2548 430.745 80 444 80H476C489.255 80 500 90.7452 500 104V386C500 399.255 489.255 410 476 410H104C90.7452 410 80 399.255 80 386V357C80 343.745 69.2548 333 56 333H24C10.7452 333 0 322.255 0 309V24C0 10.7452 10.7452 0 24 0H396C409.255 0 420 10.7452 420 24V56Z" />
-                </svg>
-                <div className="legal-card-content">
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServiceHelpsYouSection id="legal-helps-heading" cards={helpsCards} />
 
       <section className="bg-background">
-        <div className="mx-auto w-full px-4 pt-4 pb-14 sm:px-6 sm:pt-6 sm:pb-18 lg:px-8 lg:pt-8">
+        <div className="mx-auto w-full px-4 -mt-[180px] pt-0 pb-14 sm:px-6 sm:-mt-[160px] sm:pb-18 lg:px-8 lg:-mt-[180px] max-md:mt-0">
           <div className="mx-auto w-full max-w-[1280px]">
             <FaqSectionTitle />
             <div id="my-faq" className="mt-8">

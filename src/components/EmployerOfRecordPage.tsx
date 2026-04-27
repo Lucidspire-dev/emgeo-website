@@ -176,7 +176,7 @@ export function EmployerOfRecordPage() {
       <EmployerOfRecordHelpsYouSection />
 
       <section className="bg-background">
-        <Container className="pt-4 pb-14 sm:pt-6 sm:pb-18 lg:pt-8">
+        <Container className="-mt-[180px] pt-0 pb-14 sm:-mt-[160px] sm:pb-18 lg:-mt-[180px] max-md:mt-0">
           <div className="mx-auto w-full max-w-[1280px]">
             <FaqSectionTitle />
 

@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import type { MouseEvent, WheelEvent } from "react";
 import { useState } from "react";
 import { Container } from "./Container";
 import { ConnectWithUsSection } from "./ConnectWithUsForm";
 import { FaqSectionTitle } from "./FaqSectionTitle";
+import { HowItWorksAccordion } from "./HowItWorksAccordion";
+import { ServiceHelpsYouSection } from "./ServiceHelpsYouSection";
 
 const HERO_IMAGE =
   "https://emgeo.lucidspire.com/wp-content/uploads/2026/02/Screenshot-from-2026-02-27-21-16-22.png";
@@ -43,31 +44,26 @@ const helpsCards = [
     title: "Protects Assignment Success",
     description:
       "Protects Assignment Success by reducing relocation-related stress that often leads to early assignment failure or reduced employee performance.",
-    iconClassName: "fa-solid fa-circle-check",
   },
   {
     title: "Improves Employee Productivity",
     description:
       "Improves Employee Productivity by enabling assignees to focus on their professional responsibilities rather than settlement challenges.",
-    iconClassName: "fa-solid fa-star",
   },
   {
     title: "Enhances Employer Brand",
     description:
       "Enhances Employer Brand by demonstrating structured care for employee and family well-being during international deployments.",
-    iconClassName: "fa-solid fa-user-tie",
   },
   {
     title: "Provides Cost Transparency",
     description:
       "Provides Cost Transparency through clearly defined services, realistic budgeting, and visibility into third-party expenses.",
-    iconClassName: "fa-solid fa-receipt",
   },
   {
     title: "Reduces Internal Burden",
     description:
       "Reduces Internal Burden by outsourcing complex, location-specific settlement activities to experienced destination specialists.",
-    iconClassName: "fa-solid fa-handshake",
   },
 ] as const;
 
@@ -97,46 +93,6 @@ const faqs = [
 export function RelocationAndDestinationServicesPage() {
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
 
-  const onProcessWheel = (e: WheelEvent<HTMLDivElement>) => {
-    if (window.innerWidth <= 768) return;
-    if (e.deltaY <= 0) return; // horizontal lock only while scrolling down
-
-    const target = e.currentTarget.querySelector<HTMLElement>(".horizontal-process-wrapper");
-    if (!target) return;
-
-    const maxScroll = target.scrollWidth - target.clientWidth;
-    if (maxScroll <= 0) return;
-    if (target.scrollLeft >= maxScroll) return;
-
-    e.preventDefault();
-    const card = target.querySelector<HTMLElement>(".process-item");
-    const row = target.querySelector<HTMLElement>(".process-row");
-    const gapStr = row ? window.getComputedStyle(row).gap : "0px";
-    const gap = Number.parseFloat(gapStr || "0") || 0;
-    const step = card ? card.getBoundingClientRect().width + gap : 220;
-    const current = target.scrollLeft;
-    const next = Math.ceil((current + 1) / step) * step;
-    target.scrollLeft = Math.min(maxScroll, next);
-  };
-
-  const onProcessMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (window.innerWidth <= 768) return;
-
-    const target = e.currentTarget.querySelector<HTMLElement>(".horizontal-process-wrapper");
-    if (!target) return;
-
-    const rect = target.getBoundingClientRect();
-    const width = rect.width;
-    if (width <= 0) return;
-
-    const maxScroll = target.scrollWidth - target.clientWidth;
-    if (maxScroll <= 0) return;
-
-    const x = (e.clientX - rect.left) / width;
-    const clamped = Math.min(1, Math.max(0, x));
-    target.scrollLeft = clamped * maxScroll;
-  };
-
   return (
     <main className="service-page service-relocation-and-destination-services flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
       <section className="bg-background">
@@ -162,63 +118,20 @@ export function RelocationAndDestinationServicesPage() {
         <div className="mx-auto w-full px-4 pb-8 pt-2 sm:px-6 sm:pb-10 lg:px-8 lg:pt-4">
           <h2 className="text-center align-middle font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] [leading-trim:none] sm:text-[52px] lg:text-[64px] max-md:text-[28px] max-md:leading-[1.3]">
             <span className="text-[#0B1F2D]">How this </span>
-            <span className="text-[#2899E6]">works</span>
+            <span className="text-[#2899E6]">Works</span>
           </h2>
-          <div
-            className="process-wrapper mt-10"
-            onWheel={onProcessWheel}
-            onMouseMove={onProcessMouseMove}
-          >
-            <div className="horizontal-process-wrapper">
-              <div className="process-row">
-                {processSteps.map((step, idx) => (
-                  <div key={step.title} className={`process-item card-${idx + 1}`}>
-                    <div className="process-number"><span>{idx + 1}</span></div>
-                    <div className="process-card">
-                      <h2>{step.title}</h2>
-                      <p>{step.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <HowItWorksAccordion steps={processSteps} wrapperClassName="mt-4 sm:mt-6 lg:mt-8" />
         </div>
       </section>
 
-      <section className="bg-background" aria-labelledby="reloc-helps-heading">
-        <Container className="-mt-[80px] max-md:mt-0 pt-8 pb-8 sm:pt-8 sm:pb-10 lg:pt-10">
-          <h2
-            id="reloc-helps-heading"
-            className="scroll-mt-28 text-center align-middle font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] [leading-trim:none] sm:text-[52px] lg:text-[64px] max-md:text-[28px] max-md:leading-[1.3]"
-          >
-            <span className="text-[#0B1F2D]">How This Service </span>
-            <span className="text-[#2899E6]">Helps You</span>
-          </h2>
-
-          <div className="reloc-benefits mt-10">
-            <div className="emgeo-benefits-section">
-            {helpsCards.map((card, idx) => (
-              <article
-                key={card.title}
-                className={`emgeo-card ${idx === helpsCards.length - 1 ? "card5" : ""}`}
-              >
-                <div className="emgeo-icon">
-                  <i className={card.iconClassName} aria-hidden />
-                </div>
-                <div className="emgeo-content">
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
-                </div>
-              </article>
-            ))}
-            </div>
-          </div>
-        </Container>
-      </section>
+      <ServiceHelpsYouSection
+        id="reloc-helps-heading"
+        className="-mt-[80px] max-md:mt-0"
+        cards={helpsCards}
+      />
 
       <section className="bg-background">
-        <Container className="pt-10 pb-14 sm:pb-18">
+        <Container className="-mt-[180px] pt-0 pb-14 sm:-mt-[160px] sm:pb-18 lg:-mt-[180px] max-md:mt-0">
           <div className="mx-auto w-full max-w-[1280px]">
             <FaqSectionTitle />
             <div id="my-faq" className="mt-8">

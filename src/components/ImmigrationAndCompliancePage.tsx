@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ConnectWithUsSection } from "./ConnectWithUsForm";
 import { FaqSectionTitle } from "./FaqSectionTitle";
+import { HowItWorksAccordion } from "./HowItWorksAccordion";
+import { ServiceHelpsYouSection } from "./ServiceHelpsYouSection";
 
 const HERO_IMAGE =
   "https://emgeo.lucidspire.com/wp-content/uploads/2026/02/Screenshot-from-2026-02-27-21-16-22.png";
@@ -94,102 +96,6 @@ const faqs = [
 
 export function ImmigrationAndCompliancePage() {
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
-  const cardsSectionRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const section = cardsSectionRef.current;
-    if (!section) return;
-
-    const cards = Array.from(section.querySelectorAll<HTMLElement>(".imm-card"));
-    if (!cards.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("show");
-        });
-      },
-      { threshold: 0.2 },
-    );
-
-    cards.forEach((card) => observer.observe(card));
-
-    let isActive = false;
-    let reachedEnd = false;
-    let lockCompleted = false;
-    const getCardStep = () => {
-      const card = section.querySelector<HTMLElement>(".imm-card");
-      if (!card) return 60;
-      const row = section.querySelector<HTMLElement>(".imm-cards-wrapper");
-      const gapStr = row ? window.getComputedStyle(row).gap : "0px";
-      const gap = Number.parseFloat(gapStr || "0") || 0;
-      return card.getBoundingClientRect().width + gap;
-    };
-
-    const checkPosition = () => {
-      if (lockCompleted) return;
-      const rect = section.getBoundingClientRect();
-      if (
-        rect.top <= window.innerHeight * 0.4 &&
-        rect.bottom >= window.innerHeight * 0.6
-      ) {
-        isActive = true;
-      } else {
-        isActive = false;
-        reachedEnd = false;
-      }
-    };
-
-    const onWheel = (e: WheelEvent) => {
-      if (window.innerWidth <= 768) return;
-      if (!isActive || lockCompleted) return;
-      if (e.deltaY <= 0) return; // lock horizontal only while scrolling down
-
-      const maxScroll = section.scrollWidth - section.clientWidth;
-      if (section.scrollLeft < maxScroll) {
-        e.preventDefault();
-        const step = getCardStep();
-        const current = section.scrollLeft;
-        const next = Math.ceil((current + 1) / step) * step;
-        section.scrollLeft = Math.min(maxScroll, next);
-        reachedEnd = false;
-      } else if (!reachedEnd) {
-        e.preventDefault();
-        reachedEnd = true;
-      } else {
-        lockCompleted = true;
-        isActive = false;
-      }
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (window.innerWidth <= 768) return;
-
-      const rect = section.getBoundingClientRect();
-      const width = rect.width;
-      if (width <= 0) return;
-
-      const maxScroll = section.scrollWidth - section.clientWidth;
-      if (maxScroll <= 0) return;
-
-      const x = (e.clientX - rect.left) / width;
-      const clamped = Math.min(1, Math.max(0, x));
-      section.scrollLeft = clamped * maxScroll;
-    };
-
-    window.addEventListener("scroll", checkPosition, { passive: true });
-    window.addEventListener("wheel", onWheel, { passive: false });
-    section.addEventListener("mousemove", onMouseMove);
-    checkPosition();
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", checkPosition);
-      window.removeEventListener("wheel", onWheel);
-      section.removeEventListener("mousemove", onMouseMove);
-    };
-  }, []);
 
   return (
     <main className="service-page service-immigration-and-compliance flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
@@ -230,65 +136,19 @@ export function ImmigrationAndCompliancePage() {
           >
             <h2 className="-mt-[60px] text-center align-middle font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] [leading-trim:none] sm:text-[52px] lg:text-[64px] max-md:mt-0 max-md:text-[28px] max-md:leading-[1.3]">
               <span className="text-[#0B1F2D]">How this </span>
-              <span className="text-[#2899E6]">works</span>
+              <span className="text-[#2899E6]">Works</span>
             </h2>
-
-            <div id="imm-how-process" className="immv-process-wrapper">
-              <div className="immv-timeline-line" />
-              {processSteps.map((step, idx) => (
-                <div
-                  key={step.title}
-                  className={`immv-process-item immv-card-${idx + 1}`}
-                >
-                  <div className="immv-process-number">
-                    <span>{idx + 1}</span>
-                  </div>
-                  <div className="immv-process-card">
-                    <h2>{step.title}</h2>
-                    <p>{step.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <HowItWorksAccordion steps={processSteps} wrapperClassName="mt-3 sm:mt-4 lg:mt-6" />
           </div>
         </div>
       </section>
 
-      <section
-        className="bg-background overflow-x-hidden"
-        aria-labelledby="imm-helps-heading"
-      >
-        <div className="mx-auto w-full px-4 pt-6 pb-8 sm:px-6 sm:pt-8 sm:pb-10 lg:px-8 lg:pt-10">
-          <h2
-            id="imm-helps-heading"
-            className="text-center align-middle font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] [leading-trim:none] sm:text-[52px] lg:text-[64px] max-md:text-[28px] max-md:leading-[1.3]"
-          >
-            <span className="text-[#0B1F2D]">How This Service </span>
-            <span className="text-[#2899E6]">Helps You</span>
-          </h2>
-        </div>
-
-        <div ref={cardsSectionRef} className="imm-cards-section">
-          <div className="imm-cards-wrapper">
-            {helpsCards.map((card) => (
-              <article key={card.title} className="imm-card">
-                <svg viewBox="0 0 500 410" aria-hidden>
-                  <path d={card.path} fill="#DDF1FF" />
-                </svg>
-                <div className="imm-card-content">
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServiceHelpsYouSection id="imm-helps-heading" cards={helpsCards} />
 
       <section className="bg-background">
-        <div className="mx-auto w-full px-4 pt-10 pb-14 sm:px-6 sm:pb-18 lg:px-8">
+        <div className="mx-auto w-full px-4 -mt-[180px] pt-0 pb-14 sm:px-6 sm:-mt-[160px] sm:pb-18 lg:px-8 lg:-mt-[180px] max-md:mt-0">
           <div className="mx-auto w-full max-w-[1280px]">
-            <FaqSectionTitle className="mt-[50px]" />
+            <FaqSectionTitle />
 
             <div id="my-faq" className="mt-8">
               {faqs.map((f, idx) => {

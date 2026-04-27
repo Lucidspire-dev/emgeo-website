@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Container } from "./Container";
 import { ConnectWithUsSection } from "./ConnectWithUsForm";
 import { FaqSectionTitle } from "./FaqSectionTitle";
+import { HowItWorksAccordion } from "./HowItWorksAccordion";
+import { ServiceHelpsYouSection } from "./ServiceHelpsYouSection";
 
 const HERO_IMAGE =
   "https://emgeo.lucidspire.com/wp-content/uploads/2026/03/Screenshot-from-2026-03-02-12-44-42.png";
@@ -13,40 +15,30 @@ const timelineSteps = [
   {
     title: "Requirement Definition and Workforce Planning",
     titleClassName: "c1",
-    cardClassName: "bg1",
-    numberClassName: "num1",
     description:
       "The engagement begins with a detailed understanding of role requirements, skill sets, experience levels, project duration, and budgeted compensation to ensures realistic market mapping and avoids delays during sourcing and negotiation stages.",
   },
   {
     title: "Strategic Talent Sourcing (Local and International)",
     titleClassName: "c2",
-    cardClassName: "bg2",
-    numberClassName: "num2",
     description:
       "We leverages our global recruitment network, proprietary databases, and local recruitment partners to source suitable candidates either from the home country or directly within the destination country, depending on cost, timeline, and compliance.",
   },
   {
     title: "Screening, Vetting, and Shortlisting",
     titleClassName: "c3",
-    cardClassName: "bg3",
-    numberClassName: "num3",
     description:
       "Candidates undergo structured screening to validate technical competencies, role suitability, and cultural alignment. Only shortlisted profiles are presented, ensuring quality over volume and reducing evaluation time for client teams.",
   },
   {
     title: "Client Interviews, Selection, and Offer Management",
     titleClassName: "c4",
-    cardClassName: "bg4",
-    numberClassName: "num4",
     description:
       "We coordinates interviews, manages feedback loops, and supports offer finalization. We also advise on market-aligned compensation, statutory benefits, and contract structures to ensure acceptance while remaining fully compliant with local labour norms.",
   },
   {
     title: "Onboarding, Deployment, and Contract Administration",
     titleClassName: "c5",
-    cardClassName: "bg5",
-    numberClassName: "num5",
     description:
       "Once selected, we manages onboarding, documentation, immigration alignment (if applicable) and payroll onboarding through EoR or contractor frameworks. This ensures the talent is deployed legally, efficiently, and ready to contribute from day one.",
   },
@@ -118,162 +110,6 @@ const faqs = [
 
 export function RecruitmentAndContractorsPage() {
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
-  const timelineRootRef = useRef<HTMLDivElement | null>(null);
-  const cardsSectionRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const root = timelineRootRef.current;
-    if (!root) return;
-
-    const items = Array.from(root.querySelectorAll<HTMLElement>(".timeline-item"));
-    if (!items.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          const target = entry.target as HTMLElement;
-          const index = items.indexOf(target);
-
-          const delay = window.innerWidth <= 1024 ? Math.max(0, index) * 250 : 0;
-          window.setTimeout(() => {
-            target.classList.add("show");
-          }, delay);
-
-          observer.unobserve(target);
-        });
-      },
-      { threshold: 0.3 },
-    );
-
-    items.forEach((item) => observer.observe(item));
-    const onTimelineMouseMove = (e: MouseEvent) => {
-      if (window.innerWidth <= 768) return;
-
-      const rect = root.getBoundingClientRect();
-      const width = rect.width;
-      if (width <= 0) return;
-
-      const maxScroll = root.scrollWidth - root.clientWidth;
-      if (maxScroll <= 0) return;
-
-      const x = (e.clientX - rect.left) / width;
-      const clamped = Math.min(1, Math.max(0, x));
-      root.scrollLeft = clamped * maxScroll;
-    };
-    root.addEventListener("mousemove", onTimelineMouseMove);
-    return () => {
-      observer.disconnect();
-      root.removeEventListener("mousemove", onTimelineMouseMove);
-    };
-  }, []);
-
-  useEffect(() => {
-    const section = cardsSectionRef.current;
-    if (!section) return;
-
-    const cards = Array.from(section.querySelectorAll<HTMLElement>(".card"));
-    const scrollBox = section.querySelector<HTMLElement>(".cards-outer");
-    if (!cards.length || !scrollBox) return;
-
-    const onCardMoveHandlers: Array<() => void> = [];
-    const onCardLeaveHandlers: Array<() => void> = [];
-
-    cards.forEach((card) => {
-      const icon = card.querySelector<HTMLElement>(".card-icon");
-      if (!icon) return;
-
-      const onMove = () => {
-        icon.classList.add("icon-animate");
-        card.classList.add("card-animate");
-      };
-      const onLeave = () => {
-        icon.classList.remove("icon-animate");
-        card.classList.remove("card-animate");
-      };
-
-      card.addEventListener("mousemove", onMove);
-      card.addEventListener("mouseleave", onLeave);
-      onCardMoveHandlers.push(() => card.removeEventListener("mousemove", onMove));
-      onCardLeaveHandlers.push(() =>
-        card.removeEventListener("mouseleave", onLeave),
-      );
-    });
-
-    let isActive = false;
-    let reachedEnd = false;
-    let lockCompleted = false;
-    const getCardStep = () => {
-      const card = scrollBox.querySelector<HTMLElement>(".card");
-      if (!card) return 220;
-      const inner = scrollBox.querySelector<HTMLElement>(".cards-inner");
-      const gapStr = inner ? window.getComputedStyle(inner).gap : "0px";
-      const gap = Number.parseFloat(gapStr || "0") || 0;
-      return card.getBoundingClientRect().width + gap;
-    };
-
-    const checkPosition = () => {
-      if (lockCompleted) return;
-      const rect = section.getBoundingClientRect();
-      if (
-        rect.top <= window.innerHeight * 0.4 &&
-        rect.bottom >= window.innerHeight * 0.6
-      ) {
-        isActive = true;
-      } else {
-        isActive = false;
-        reachedEnd = false;
-      }
-    };
-
-    const onWheel = (e: WheelEvent) => {
-      if (window.innerWidth <= 768) return;
-      if (!isActive || lockCompleted) return;
-
-      const maxScroll = scrollBox.scrollWidth - scrollBox.clientWidth;
-      if (e.deltaY > 0) {
-        if (scrollBox.scrollLeft < maxScroll) {
-          e.preventDefault();
-          const step = getCardStep();
-          const current = scrollBox.scrollLeft;
-          const next = Math.ceil((current + 1) / step) * step;
-          scrollBox.scrollLeft = Math.min(maxScroll, next);
-          reachedEnd = false;
-        } else if (!reachedEnd) {
-          e.preventDefault();
-          reachedEnd = true;
-        } else {
-          lockCompleted = true;
-          isActive = false;
-        }
-      }
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (window.innerWidth <= 768) return;
-      const rect = scrollBox.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const width = rect.width;
-      if (!width) return;
-      const scrollAmount = scrollBox.scrollWidth - width;
-      const move = Math.pow(mouseX / width, 1.2) * scrollAmount;
-      scrollBox.scrollLeft = move;
-    };
-
-    window.addEventListener("scroll", checkPosition, { passive: true });
-    window.addEventListener("wheel", onWheel, { passive: false });
-    scrollBox.addEventListener("mousemove", onMouseMove);
-    checkPosition();
-
-    return () => {
-      onCardMoveHandlers.forEach((off) => off());
-      onCardLeaveHandlers.forEach((off) => off());
-      window.removeEventListener("scroll", checkPosition);
-      window.removeEventListener("wheel", onWheel);
-      scrollBox.removeEventListener("mousemove", onMouseMove);
-    };
-  }, []);
 
   return (
     <main className="service-page service-recruitment-and-contractors flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
@@ -312,78 +148,26 @@ export function RecruitmentAndContractorsPage() {
       <section className="bg-background">
         <Container className="pb-8 pt-0 sm:pb-10">
           <h2 className="text-center align-middle font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] [leading-trim:none] text-[#0B1F2D] sm:text-[52px] lg:text-[64px] max-md:text-[28px] max-md:leading-[1.3]">
-            How this works
+            <span className="text-[#0B1F2D]">How this </span>
+            <span className="text-[#2899E6]">Works</span>
           </h2>
-
-          <div
-            ref={timelineRootRef}
-            className="timeline-wrapper"
-            aria-label="Recruitment process timeline"
-          >
-            {timelineSteps.map((s, idx) => (
-              <div
-                key={s.title}
-                className={`timeline-item ${idx % 2 === 0 ? "right" : "left"} ${
-                  idx === timelineSteps.length - 1 ? "last" : ""
-                }`}
-              >
-                <div className={`timeline-number ${s.numberClassName}`}>
-                  {idx + 1}
-                </div>
-                <div className={`timeline-card ${s.cardClassName}`}>
-                  <h3 className={s.titleClassName}>{s.title}</h3>
-                  <p>{s.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <HowItWorksAccordion
+            steps={timelineSteps.map((s) => ({
+              title: s.title,
+              description: s.description,
+            }))}
+          />
         </Container>
       </section>
 
-      <section className="bg-background">
-        <Container className="-mt-[50px] pb-8 pt-2 sm:pb-10 lg:pt-4 max-md:mt-0">
-          <h2 className="text-center align-middle font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] [leading-trim:none] sm:text-[52px] lg:text-[64px] max-md:text-[28px] max-md:leading-[1.3]">
-            <span className="text-[#0B1F2D]">How This Service </span>
-            <span className="text-[#2899E6]">Helps You</span>
-          </h2>
-        </Container>
-        <div ref={cardsSectionRef} className="rc-cards-wrapper">
-          <div className="cards-wrapper">
-            <div className="cards-outer">
-              <div className="cards-inner">
-                {helpsCards.map((c) => (
-                  <div key={c.title} className="card">
-                    <div className="card-icon">
-                      <Image
-                        src={c.iconSrc}
-                        alt=""
-                        fill
-                        className="object-contain"
-                        sizes="65px"
-                      />
-                    </div>
-                    <svg className="bg-shape" viewBox="0 0 440 500" aria-hidden>
-                      <path
-                        d="M440 476C440 489.255 429.255 500 416 500H24C10.7452 500 0 489.255 0 476V24C0 10.7452 10.7452 0 24 0H136C149.255 0 160 10.7452 160 24V56C160 69.2548 170.745 80 184 80H256C269.255 80 280 69.2548 280 56V24C280 10.7452 290.745 0 304 0H416C429.255 0 440 10.7452 440 24V476Z"
-                        fill="#DDF1FF"
-                      />
-                    </svg>
-                    <div className="card-content">
-                      <div className="card-heading">
-                        <h3>{c.title}</h3>
-                      </div>
-                      <p>{c.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ServiceHelpsYouSection
+        id="recruitment-helps-heading"
+        className="-mt-[50px] max-md:mt-0"
+        cards={helpsCards}
+      />
 
       <section className="bg-background">
-        <Container className="pt-10 pb-14 sm:pb-18">
+        <Container className="-mt-[180px] pt-0 pb-14 sm:-mt-[160px] sm:pb-18 lg:-mt-[180px] max-md:mt-0">
           <div className="mx-auto w-full max-w-[1280px]">
             <FaqSectionTitle />
 

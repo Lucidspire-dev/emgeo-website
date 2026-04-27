@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Container } from "./Container";
 import { ConnectWithUsSection } from "./ConnectWithUsForm";
 import { GlobalPayrollHelpsYouSection } from "./GlobalPayrollHelpsYouSection";
 import { FaqSectionTitle } from "./FaqSectionTitle";
+import { HowItWorksAccordion } from "./HowItWorksAccordion";
 
 const processSteps = [
   {
@@ -69,83 +70,7 @@ const faqs = [
 ] as const;
 
 export function GlobalPayrollSolutionsPage() {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const scrollBoxRef = useRef<HTMLDivElement | null>(null);
   const [activeFaqIndex, setActiveFaqIndex] = useState(0);
-
-  useEffect(() => {
-    const sectionEl = sectionRef.current;
-    const scrollBoxEl = scrollBoxRef.current;
-    if (!sectionEl || !scrollBoxEl) return;
-    const getCardStep = () => {
-      const card = scrollBoxEl.querySelector<HTMLElement>(".process-item");
-      if (!card) return 220;
-      const row = scrollBoxEl.querySelector<HTMLElement>(".process-row");
-      const gapStr = row ? window.getComputedStyle(row).gap : "0px";
-      const gap = Number.parseFloat(gapStr || "0") || 0;
-      return card.getBoundingClientRect().width + gap;
-    };
-
-    let isActive = false;
-    let reachedEnd = false;
-
-    const checkPosition = () => {
-      const rect = sectionEl.getBoundingClientRect();
-      isActive = rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.6;
-      if (!isActive) {
-        reachedEnd = false;
-      }
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (window.innerWidth <= 768) return;
-
-      const rect = sectionEl.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const width = rect.width;
-      if (width <= 0) return;
-
-      const scrollAmount = scrollBoxEl.scrollWidth - width;
-      if (scrollAmount <= 0) return;
-
-      const move = (mouseX / width) * scrollAmount;
-      scrollBoxEl.scrollLeft = move;
-    };
-
-    const onWheel = (e: WheelEvent) => {
-      if (window.innerWidth <= 768) return;
-      if (!isActive) return;
-      if (e.deltaY <= 0) return; // Apply horizontal lock only while moving down
-
-      const maxScroll = scrollBoxEl.scrollWidth - scrollBoxEl.clientWidth;
-      if (maxScroll <= 0) return;
-
-      if (scrollBoxEl.scrollLeft < maxScroll) {
-        e.preventDefault();
-        const step = getCardStep();
-        const current = scrollBoxEl.scrollLeft;
-        const next = Math.ceil((current + 1) / step) * step;
-        scrollBoxEl.scrollLeft = Math.min(maxScroll, next);
-        reachedEnd = false;
-      } else if (!reachedEnd) {
-        e.preventDefault();
-        reachedEnd = true;
-      }
-    };
-
-    // Initial
-    checkPosition();
-
-    window.addEventListener("scroll", checkPosition);
-    window.addEventListener("wheel", onWheel, { passive: false });
-    sectionEl.addEventListener("mousemove", onMouseMove);
-
-    return () => {
-      window.removeEventListener("scroll", checkPosition);
-      window.removeEventListener("wheel", onWheel as EventListener);
-      sectionEl.removeEventListener("mousemove", onMouseMove);
-    };
-  }, []);
 
   return (
     <main className="service-page service-global-payroll flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
@@ -183,28 +108,16 @@ export function GlobalPayrollSolutionsPage() {
       <section className="bg-background">
         <Container className="pb-4 pt-2 sm:pb-6 lg:pt-4">
           <h2 className="text-center align-middle font-['Darker_Grotesque'] text-[36px] font-bold leading-[110%] tracking-[0] text-[#0B1F2D] sm:text-[48px] lg:text-[64px] max-md:text-[28px] max-md:leading-[1.3]">
-            How this works
+            <span className="text-[#0B1F2D]">How this </span>
+            <span className="text-[#2899E6]">Works</span>
           </h2>
+          <HowItWorksAccordion
+            steps={processSteps.map((s) => ({
+              title: s.title,
+              description: s.description,
+            }))}
+          />
         </Container>
-        <div className="w-full">
-          <div className="process-wrapper" ref={sectionRef}>
-            <div className="horizontal-process-wrapper" ref={scrollBoxRef}>
-              <div className="process-row">
-                {processSteps.map((s) => (
-                  <div key={s.key} className={`process-item ${s.cardClass}`}>
-                    <div className="process-number">
-                      <span>{s.key}</span>
-                    </div>
-                    <div className="process-card">
-                      <h2>{s.title}</h2>
-                      <p>{s.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       <GlobalPayrollHelpsYouSection />
