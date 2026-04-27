@@ -28,7 +28,6 @@ export function SiteHeader() {
     () => [
       { label: "Home", href: "/" },
       { label: "About Us", href: "/about" },
-      { label: "Blog", href: "/blog" },
     ],
     [],
   );
@@ -149,13 +148,6 @@ export function SiteHeader() {
             </Link>
 
             <Link
-              href={items[2].href}
-              className="font-['Plus_Jakarta_Sans'] text-base font-bold text-foreground/80 hover:text-foreground"
-            >
-              {items[2].label}
-            </Link>
-
-            <Link
               href="/contact"
               className="flex h-[44px] w-[150px] items-center justify-between gap-2 rounded-[28px] bg-[#0F3D5C] py-1 pl-6 pr-1 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0b2f48] hover:shadow-lg"
             >
@@ -267,14 +259,6 @@ export function SiteHeader() {
                 className="rounded-xl border border-black/10 bg-background px-5 py-4 font-['Plus_Jakarta_Sans'] text-lg font-bold text-foreground hover:text-foreground"
               >
                 {items[1].label}
-              </Link>
-
-              <Link
-                href={items[2].href}
-                onClick={() => setOpen(false)}
-                className="rounded-xl border border-black/10 bg-background px-5 py-4 font-['Plus_Jakarta_Sans'] text-lg font-bold text-foreground hover:text-foreground"
-              >
-                {items[2].label}
               </Link>
 
               <Link

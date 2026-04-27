@@ -12,12 +12,6 @@ const HERO_IMAGE =
   "https://emgeo.lucidspire.com/wp-content/uploads/2026/01/3b892dbf6efff947d662e39f413d55abdf0ca1c8-1.png";
 const STAND_FOR_SIDE_IMAGE = "/images/about-standfor-building-v2.png";
 
-const NEWS = [
-  { source: "News Website", title: "Title of the news article or blog will come here", date: "25 October 2025" },
-  { source: "News Website", title: "Title of the news article or blog will come here", date: "25 October 2025" },
-  { source: "News Website", title: "Title of the news article or blog will come here", date: "25 October 2025" },
-] as const;
-
 export default function AboutPage() {
   return (
     <main className="about-page flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
@@ -182,86 +176,6 @@ export default function AboutPage() {
               <GlobalPresenceMap />
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="relative z-10 -mt-12 min-w-0 bg-background sm:-mt-14 lg:-mt-16">
-        <div className="box-border w-full px-4 pb-10 pt-0 sm:px-6 sm:pb-14 sm:pt-1 md:pb-18 md:pt-2 lg:px-8">
-          <h2 className="text-center font-['Darker_Grotesque'] text-[28px] font-bold leading-[1.25] tracking-[0] text-[#0F3D5C] md:text-[64px] md:leading-[120%]">
-            Latest News & Highlights
-          </h2>
-
-          <div className="mx-auto mt-4 grid min-w-0 w-full max-w-[1280px] grid-cols-1 gap-6 md:mt-5 lg:grid-cols-[minmax(0,628px)_minmax(0,628px)] lg:items-start">
-            <article className="relative mx-auto aspect-square w-full max-w-[628px] min-w-0 overflow-hidden rounded-[16px] lg:mx-0 lg:h-[628px] lg:w-full lg:max-w-none">
-              <img
-                src="/images/news-featured-meeting.png"
-                alt="News featured image"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-[#0B1F2D]/42" />
-              <img
-                src="/images/news-featured-corner-arrow.png"
-                alt=""
-                aria-hidden
-                className="pointer-events-none absolute right-0 top-0 z-10 h-[72px] w-[72px] max-w-[22%] object-contain sm:h-[88px] sm:w-[88px] lg:h-[102px] lg:w-[102px] lg:max-w-none"
-              />
-
-              <div className="absolute bottom-6 left-4 right-4 z-10 flex min-w-0 flex-col items-start text-left sm:bottom-8 sm:left-6 sm:right-6">
-                <div className="mb-3 inline-flex min-w-0 max-w-full items-center justify-start gap-2 sm:mb-4">
-                  <img
-                    src="https://emgeo.lucidspire.com/wp-content/uploads/2025/11/Ellipse-14670.png"
-                    alt=""
-                    className="h-7 w-7 shrink-0 rounded-full bg-white/95 object-contain sm:h-8 sm:w-8"
-                  />
-                  <span className="font-['Darker_Grotesque'] text-[16px] font-medium leading-[130%] tracking-[0] text-white sm:text-[18px] md:text-[20px]">
-                    {NEWS[0].source}
-                  </span>
-                </div>
-                <h4 className="max-w-full font-['Darker_Grotesque'] text-[26px] font-bold leading-[1.05] tracking-[0] text-white sm:text-[32px] md:text-[40px] lg:max-w-[430px] lg:text-[48px]">
-                  {NEWS[0].title}
-                </h4>
-                <p className="mt-3 font-['Darker_Grotesque'] text-[14px] font-medium leading-[130%] tracking-[0] text-[#FFFFFFB2] sm:mt-4 sm:text-[15px] md:text-[16px]">
-                  {NEWS[0].date}
-                </p>
-              </div>
-            </article>
-
-            <div className="grid min-w-0 w-full max-w-[628px] gap-5 justify-self-center sm:gap-6 lg:max-w-none lg:justify-self-stretch">
-              {NEWS.slice(1, 3).map((n, idx) => (
-                <article
-                  key={`${n.title}-${idx}`}
-                  className="relative mx-auto min-h-[240px] w-full max-w-[628px] min-w-0 overflow-hidden rounded-[16px] bg-[#DDF1FF] p-5 sm:min-h-[280px] sm:p-7 md:h-[302px] lg:w-full lg:max-w-none lg:p-8"
-                >
-                  <img
-                    src="/images/news-featured-corner-arrow.png"
-                    alt=""
-                    aria-hidden
-                    className="pointer-events-none absolute right-0 top-0 z-10 h-[72px] w-[72px] max-w-[22%] object-contain sm:h-[88px] sm:w-[88px] lg:h-[102px] lg:w-[102px] lg:max-w-none"
-                  />
-
-                  <div className="relative z-10 mt-6 flex min-w-0 flex-col items-start text-left sm:mt-10">
-                    <div className="mb-3 inline-flex min-w-0 max-w-full items-center justify-start gap-2 sm:mb-4">
-                      <img
-                        src="https://emgeo.lucidspire.com/wp-content/uploads/2025/11/Ellipse-14670.png"
-                        alt=""
-                        className="h-7 w-7 shrink-0 rounded-full bg-white object-contain sm:h-8 sm:w-8"
-                      />
-                      <span className="font-['Darker_Grotesque'] text-[16px] font-medium leading-[130%] tracking-[0] text-[#0B1F2D] sm:text-[18px] md:text-[20px]">
-                        {n.source}
-                      </span>
-                    </div>
-                    <h4 className="max-w-full font-['Darker_Grotesque'] text-[26px] font-bold leading-[1.05] tracking-[0] text-[#0B1F2D] sm:text-[32px] md:text-[40px] lg:max-w-[430px] lg:text-[48px]">
-                      {n.title}
-                    </h4>
-                    <p className="mt-3 font-['Darker_Grotesque'] text-[14px] font-medium leading-[130%] tracking-[0] text-[#0B1F2D]/65 sm:mt-4 sm:text-[15px] md:text-[16px]">
-                      {n.date}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
         </div>
       </section>
 
