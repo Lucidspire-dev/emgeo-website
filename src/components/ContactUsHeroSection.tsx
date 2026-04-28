@@ -81,7 +81,7 @@ export function ContactUsHeroSection() {
         </p>
 
         <div className="mx-auto mt-10 w-full max-w-[1025px] sm:mt-14">
-          <div className="relative mx-auto box-border rounded-[32px] bg-[#FFFEFB] px-4 pb-8 pt-7 shadow-none sm:px-10 sm:pb-16 sm:pt-10 lg:h-[396px] lg:w-[832px] lg:px-[40px] lg:pt-[40px] lg:pr-[40px] lg:pb-[64px] lg:pl-[40px]">
+          <div className="relative mx-auto box-border rounded-[32px] bg-[#FFFEFB] px-4 pb-8 pt-7 shadow-none sm:px-10 sm:pb-16 sm:pt-10 lg:min-h-[396px] lg:w-[832px] lg:px-[40px] lg:pt-[40px] lg:pr-[40px] lg:pb-[64px] lg:pl-[40px]">
             <form
               className="relative flex h-full w-full min-w-0 flex-col gap-3 max-md:gap-4"
               onSubmit={(e) => {
@@ -171,7 +171,7 @@ export function ContactUsHeroSection() {
                 </div>
               ) : null}
 
-              <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 translate-y-[48px] justify-center max-md:static max-md:mt-1 max-md:w-full max-md:translate-x-0 max-md:translate-y-0">
+              <div className="mt-3 flex justify-center max-md:w-full">
                 <ContactSubmitButton disabled={!isValid} />
               </div>
             </form>

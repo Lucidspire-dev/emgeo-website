@@ -183,7 +183,14 @@ export function SiteFooter() {
 
   const onNewsletterSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!email.trim()) return;
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) return;
+
+    const subject = encodeURIComponent("Newsletter Subscription Request");
+    const body = encodeURIComponent(
+      `Hello Emgeo Team,\n\nPlease subscribe this email to updates:\n${trimmedEmail}\n\nThanks.`,
+    );
+    window.location.href = `mailto:operations@emgeoglobal.com?subject=${subject}&body=${body}`;
     setStatus("success");
   };
 
@@ -192,8 +199,9 @@ export function SiteFooter() {
       {/* —— Mobile —— */}
       <div className="h-auto min-h-[1080px] overflow-visible px-5 pb-32 pt-5 lg:hidden">
         <div className="relative -mx-5 -mt-5 w-[calc(100%+2.5rem)] max-w-none overflow-hidden rounded-tl-[26px]">
+          <div className="pointer-events-none absolute left-[3px] -top-[13px] z-30 h-6 w-12 bg-white" />
           <img
-            src="/images/footer-logo-framed.png"
+            src="/images/emgeo-logo-footer-brand.png"
             alt="Emgeo Global"
             className="block h-auto w-full max-h-[120px] object-contain object-left"
           />
@@ -282,8 +290,9 @@ export function SiteFooter() {
       <div className="relative mr-auto ml-0 hidden min-h-[647px] w-full max-w-[1392px] bg-[#1C4E71] lg:block">
         <div className="relative grid items-start lg:grid-cols-[minmax(0,411px)_minmax(0,1fr)]">
           <div className="relative left-0 w-full max-w-[411px] shrink-0 self-start overflow-hidden rounded-tl-[26px]">
+            <div className="pointer-events-none absolute left-[3px] -top-[13px] z-30 h-6 w-12 bg-white" />
             <img
-              src="/images/footer-logo-framed.png"
+              src="/images/emgeo-logo-footer-brand.png"
               alt="Emgeo Global"
               className="block h-auto w-full max-h-[137px] object-contain object-left"
             />

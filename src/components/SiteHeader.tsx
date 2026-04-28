@@ -60,9 +60,9 @@ export function SiteHeader() {
             <Image
               src="/images/emgeo-logo.png"
               alt="Emgeo Global"
-              width={230}
-              height={72}
-              className="h-10 w-auto sm:h-12"
+              width={360}
+              height={112}
+              className="h-14 w-auto sm:h-16 lg:h-20"
               priority
             />
           </Link>

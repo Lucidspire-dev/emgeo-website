@@ -3,7 +3,6 @@ import { AboutCoreValuesScroller } from "../../components/AboutCoreValuesScrolle
 import { AboutLeadershipSection } from "../../components/AboutLeadershipSection";
 import { AboutStatsCounters } from "../../components/AboutStatsCounters";
 import { AboutWhyTrustShowcaseSection } from "../../components/AboutWhyTrustShowcaseSection";
-import { AboutWhyTrustSection } from "../../components/AboutWhyTrustSection";
 import { ConnectWithUsSection } from "../../components/ConnectWithUsForm";
 import { Container } from "../../components/Container";
 import { GlobalPresenceMap } from "../../components/GlobalPresenceMap";
@@ -149,8 +148,6 @@ export default function AboutPage() {
       </section>
 
       <AboutLeadershipSection />
-
-      <AboutWhyTrustSection />
 
       <AboutWhyTrustShowcaseSection />
 
