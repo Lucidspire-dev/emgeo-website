@@ -33,7 +33,7 @@ export function ContactForm() {
         // Placeholder: wire this to your backend/email service later.
         setStatus({
           type: "success",
-          text: "Thanks! Your message has been captured. We'll reach out soon.",
+          text: "Thank you! Your message has been received. We will get back to you soon.",
         });
         setValues({ name: "", email: "", message: "" });
       }}
