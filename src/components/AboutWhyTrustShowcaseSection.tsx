@@ -26,7 +26,7 @@ export function AboutWhyTrustShowcaseSection() {
           </h2>
 
           <div className="mt-4 grid min-w-0 items-center gap-6 sm:mt-8 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
-            <div className="relative mx-auto translate-x-[10px] h-[310px] w-[286px] sm:h-[400px] sm:w-[348px] lg:mx-0 lg:h-[560px] lg:w-full lg:max-w-none">
+            <div className="relative mx-auto translate-x-[10px] h-[315px] w-[286px] sm:h-[405px] sm:w-[348px] lg:mx-0 lg:translate-y-[17px] lg:h-[565px] lg:w-full lg:max-w-none">
               <Image
                 src={CERTIFICATE_IMAGE}
                 alt="ISO Certificate"
@@ -37,7 +37,7 @@ export function AboutWhyTrustShowcaseSection() {
             </div>
 
             <div className="relative pt-6 sm:pt-8 lg:w-full lg:max-w-[640px] lg:justify-self-start">
-              <div className="why-trust-pop-iso absolute left-5 top-0 z-30 h-[74px] w-[74px] -translate-y-1/2 sm:left-10 sm:h-[92px] sm:w-[92px] lg:left-12" style={{ marginTop: "90px", marginLeft: "-40px" }}>
+              <div className="why-trust-pop-iso absolute left-5 top-0 z-30 ml-[-18px] mt-[71px] h-[74px] w-[74px] -translate-y-1/2 sm:left-10 sm:ml-[-40px] sm:mt-[90px] sm:h-[92px] sm:w-[92px] lg:left-12">
                 <Image
                   src={ISO_LOGO}
                   alt="ISO 27001 Certified"
