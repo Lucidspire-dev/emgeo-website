@@ -22,7 +22,7 @@ const timelineSteps = [
     title: "Strategic Talent Sourcing (Local and International)",
     titleClassName: "c2",
     description:
-      "We leverages our global recruitment network, proprietary databases, and local recruitment partners to source suitable candidates either from the home country or directly within the destination country, depending on cost, timeline, and compliance.",
+      "We leverage our global recruitment network, proprietary databases, and local recruitment partners to source suitable candidates either from the home country or directly within the destination country, depending on cost, timeline, and compliance.",
   },
   {
     title: "Screening, Vetting, and Shortlisting",
@@ -34,7 +34,7 @@ const timelineSteps = [
     title: "Client Interviews, Selection, and Offer Management",
     titleClassName: "c4",
     description:
-      "We coordinates interviews, manages feedback loops, and supports offer finalization. We also advise on market-aligned compensation, statutory benefits, and contract structures to ensure acceptance while remaining fully compliant with local labour norms.",
+      "We coordinate interviews, manage feedback loops, and support offer finalization. We also advise on market-aligned compensation, statutory benefits, and contract structures to ensure acceptance while remaining fully compliant with local labour norms.",
   },
   {
     title: "Onboarding, Deployment, and Contract Administration",
