@@ -2887,8 +2887,8 @@ body {
 
 #how-works .elementor-accordion-item.elementor-active {
   border-radius: 24px;
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
 }
 
 #how-works .elementor-tab-title {

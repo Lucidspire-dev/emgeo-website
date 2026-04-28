@@ -91,19 +91,19 @@ export function GlobalPayrollHelpsYouSection() {
       <div className="mx-auto w-full max-w-[1440px] px-4 pb-0 pt-8 sm:px-6 sm:pt-10 lg:px-8 lg:pt-12">
         <h2
           id="payroll-helps-heading"
-          className="text-left font-['Darker_Grotesque'] text-[36px] font-bold leading-[110%] tracking-[0] sm:text-[48px] lg:ml-[120px] lg:text-[64px]"
+          className="text-left font-['Darker_Grotesque'] text-[36px] font-bold leading-[110%] tracking-[0] sm:text-[48px] lg:ml-[130px] lg:text-[64px]"
         >
           <span className="block text-[#0B1F2D]">How This Service</span>
           <span className="mt-1 block text-[#2899E6]">Helps You</span>
         </h2>
 
-        <div className="mt-12 flex flex-col gap-8 md:mt-16 lg:flex-row lg:items-start lg:gap-x-[60px]">
-          <div className="flex w-full shrink-0 flex-col gap-8 lg:ml-[120px] lg:w-[560px] lg:gap-[60px]">
+        <div className="mt-12 flex flex-col gap-4 md:mt-16 lg:flex-row lg:items-start lg:gap-x-[30px]">
+          <div className="flex w-full shrink-0 flex-col gap-4 lg:ml-[120px] lg:w-[560px] lg:gap-[30px]">
             {LEFT_CARDS.map((c) => (
               <HelpsNotchCard key={c.title} {...c} />
             ))}
           </div>
-          <div className="flex w-full shrink-0 flex-col gap-8 lg:w-[556px] lg:gap-[60px] lg:-translate-y-[200px]">
+          <div className="flex w-full shrink-0 flex-col gap-4 lg:w-[556px] lg:gap-[30px] lg:-translate-y-[200px]">
             {RIGHT_CARDS.map((c) => (
               <HelpsNotchCard key={c.title} {...c} />
             ))}

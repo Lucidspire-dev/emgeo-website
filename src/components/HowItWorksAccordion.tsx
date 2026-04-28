@@ -19,7 +19,7 @@ export function HowItWorksAccordion({
   return (
     <div
       id="how-works"
-      className={`scroll-accordion mx-auto w-full max-w-[1280px] flex flex-col gap-6 md:gap-0 ${wrapperClassName}`}
+      className={`scroll-accordion mx-auto w-full max-w-[1280px] flex flex-col gap-3 sm:gap-4 md:gap-0 ${wrapperClassName}`}
     >
       {steps.map((step, idx) => (
         <div
