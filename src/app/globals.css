@@ -3841,6 +3841,15 @@ ul.sub-menu li a:focus-visible {
   margin-top: 0 !important;
 }
 
+/* Relocation: remove extra gap between hero and "How this Works" */
+.service-relocation-and-destination-services > :nth-child(2) {
+  margin-top: 0 !important;
+}
+
+.service-relocation-and-destination-services > :nth-child(2) > div {
+  padding-top: 0 !important;
+}
+
 .service-legalization-and-attestation-support .legal-process-wrapper {
   /* Tighten heading-to-steps gap while keeping row breathing space */
   padding-top: 24px !important;
@@ -3942,7 +3951,7 @@ ul.sub-menu li a:focus-visible {
 
 @media (min-width: 769px) {
   .service-immigration-and-compliance .imm-how-stack > h2 {
-    margin-top: -80px !important;
+    margin-top: 0 !important;
   }
 }
 

@@ -7,8 +7,7 @@ import { FaqSectionTitle } from "./FaqSectionTitle";
 import { HowItWorksAccordion } from "./HowItWorksAccordion";
 import { ServiceHelpsYouSection } from "./ServiceHelpsYouSection";
 
-const HERO_IMAGE =
-  "https://emgeo.lucidspire.com/wp-content/uploads/2026/02/Screenshot-from-2026-02-27-21-16-22.png";
+const HERO_IMAGE = "/images/service-hero-2.png";
 
 const processSteps = [
   {
@@ -107,12 +106,12 @@ export function ImmigrationAndCompliancePage() {
                 src={HERO_IMAGE}
                 alt="Immigration and compliance service"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-[50%_45%]"
                 sizes="(min-width: 1280px) 1238px, 100vw"
                 priority
               />
             </div>
-            <div className="imm-hero-panel relative z-10 mx-auto -mt-8 w-full max-w-[980px] rounded-[24px] border-0 p-6 shadow-none outline-none [&_*]:border-b-0 [&_hr]:hidden sm:-mt-12 sm:p-8 lg:-mt-[214px] lg:ml-[60px] lg:max-w-[900px] lg:p-10">
+            <div className="imm-hero-panel relative z-10 mx-auto -mt-8 w-full max-w-[980px] rounded-[24px] border-0 bg-white p-6 shadow-none outline-none [&_*]:border-b-0 [&_hr]:hidden sm:-mt-12 sm:p-8 lg:-mt-[214px] lg:ml-[60px] lg:max-w-[900px] lg:p-10">
               <h1 className="align-middle font-['Darker_Grotesque'] text-[42px] font-bold leading-[110%] tracking-[0] [leading-trim:none] text-[#2899E6] sm:text-[56px] lg:text-[64px] max-md:text-[28px] max-md:leading-[1.3]">
                 Immigration and Compliance
               </h1>

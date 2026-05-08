@@ -8,8 +8,7 @@ import { FaqSectionTitle } from "./FaqSectionTitle";
 import { HowItWorksAccordion } from "./HowItWorksAccordion";
 import { ServiceHelpsYouSection } from "./ServiceHelpsYouSection";
 
-const HERO_IMAGE =
-  "https://emgeo.lucidspire.com/wp-content/uploads/2026/02/Screenshot-from-2026-02-27-21-16-22.png";
+const HERO_IMAGE = "/images/service-hero-6.png";
 
 const processSteps = [
   {
@@ -96,12 +95,12 @@ export function RelocationAndDestinationServicesPage() {
   return (
     <main className="service-page service-relocation-and-destination-services flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
       <section className="bg-background">
-        <Container className="py-12 sm:py-16 lg:py-20">
+        <Container className="pt-12 pb-6 sm:pt-16 sm:pb-8 lg:pt-20 lg:pb-8">
           <div className="relative">
             <div className="relative mx-auto aspect-[1238/457] w-full max-w-[1238px] overflow-hidden rounded-[24px]">
-              <Image src={HERO_IMAGE} alt="Relocation and destination services" fill className="object-cover object-center" sizes="(min-width: 1280px) 1238px, 100vw" priority />
+              <Image src={HERO_IMAGE} alt="Relocation and destination services" fill className="object-cover object-[50%_45%]" sizes="(min-width: 1280px) 1238px, 100vw" priority />
             </div>
-            <div className="relative z-10 mx-auto -mt-8 w-full max-w-[980px] rounded-[24px] p-6 sm:-mt-12 sm:p-8 lg:-mt-[214px] lg:ml-[-25px] lg:max-w-[900px] lg:p-10">
+            <div className="relative z-10 mx-auto -mt-[66px] w-full max-w-[980px] rounded-[24px] bg-white p-6 sm:-mt-[82px] sm:p-8 lg:-mt-[256px] lg:ml-[-25px] lg:max-w-[900px] lg:p-10">
               <h1 className="align-middle font-['Darker_Grotesque'] text-[44px] font-bold leading-[110%] tracking-[0] [leading-trim:none] text-[#2899E6] sm:text-[60px] lg:text-[80px] max-md:text-[28px] max-md:leading-[1.3]">
                 Relocation and Destination Services
               </h1>
@@ -115,7 +114,7 @@ export function RelocationAndDestinationServicesPage() {
       </section>
 
       <section className="bg-background">
-        <div className="mx-auto w-full px-4 pb-8 pt-2 sm:px-6 sm:pb-10 lg:px-8 lg:pt-4">
+        <div className="mx-auto w-full px-4 pb-8 pt-0 sm:px-6 sm:pb-10 lg:px-8 lg:pt-2">
           <h2 className="text-center align-middle font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] [leading-trim:none] sm:text-[52px] lg:text-[64px] max-md:text-[28px] max-md:leading-[1.3]">
             <span className="text-[#0B1F2D]">How this </span>
             <span className="text-[#2899E6]">Works</span>

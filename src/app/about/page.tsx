@@ -7,9 +7,9 @@ import { ConnectWithUsSection } from "../../components/ConnectWithUsForm";
 import { Container } from "../../components/Container";
 import { GlobalPresenceMap } from "../../components/GlobalPresenceMap";
 
-const HERO_IMAGE =
-  "https://emgeo.lucidspire.com/wp-content/uploads/2026/01/3b892dbf6efff947d662e39f413d55abdf0ca1c8-1.png";
-const STAND_FOR_SIDE_IMAGE = "/images/about-standfor-building-v2.png";
+const HERO_IMAGE = "/images/about-hero-new.png";
+const STAND_FOR_MISSION_IMAGE = "/images/about-standfor-mission-new.png";
+const STAND_FOR_VISION_IMAGE = "/images/about-standfor-vision-new.png";
 
 export default function AboutPage() {
   return (
@@ -58,7 +58,7 @@ export default function AboutPage() {
                 </div>
                 <div className="relative min-h-[280px] w-full min-w-0 overflow-hidden rounded-[16px] sm:min-h-[360px] lg:h-[467px] lg:w-[517px] lg:min-h-0">
                   <Image
-                    src="/images/about-intro-team-v2.png"
+                    src="/images/about-intro-team-new.png"
                     alt="Professional global mobility consultation"
                     fill
                     className="object-cover object-center opacity-100"
@@ -84,7 +84,7 @@ export default function AboutPage() {
               <div className="flex h-full min-w-0 flex-col gap-6 lg:grid lg:grid-cols-[639px_minmax(0,1fr)] lg:items-start">
                 <div className="relative h-[200px] w-full min-w-0 overflow-hidden rounded-[24px] border border-[#B7C6D6] shadow-none sm:h-[220px] lg:h-[320px] lg:w-[639px]">
                   <Image
-                    src={STAND_FOR_SIDE_IMAGE}
+                    src={STAND_FOR_MISSION_IMAGE}
                     alt="City skyline representing global expansion"
                     fill
                     className="object-cover"
@@ -122,7 +122,7 @@ export default function AboutPage() {
                 </div>
                 <div className="relative h-[200px] w-full min-w-0 overflow-hidden rounded-[24px] border border-[#B7C6D6] shadow-none sm:h-[220px] lg:h-[320px] lg:w-[639px]">
                   <Image
-                    src={STAND_FOR_SIDE_IMAGE}
+                    src={STAND_FOR_VISION_IMAGE}
                     alt="City skyline representing global expansion"
                     fill
                     className="object-cover"

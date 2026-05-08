@@ -7,7 +7,7 @@ import { FaqSectionTitle } from "./FaqSectionTitle";
 import { HowItWorksAccordion } from "./HowItWorksAccordion";
 import { ServiceHelpsYouSection } from "./ServiceHelpsYouSection";
 
-const HERO_IMAGE = "https://emgeo.lucidspire.com/wp-content/uploads/2026/02/h3.png";
+const HERO_IMAGE = "/images/service-hero-5.png";
 
 const processSteps = [
   {
@@ -107,11 +107,11 @@ export function LegalizationAndAttestationSupportPage() {
               </p>
             </div>
             <div className="relative flex w-full min-w-0 justify-center lg:justify-end">
-              <div className="relative aspect-[1366/742] w-full max-w-[500px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[272px] lg:w-[500px]">
+              <div className="relative aspect-[1366/742] w-full max-w-[500px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[320px] lg:w-[500px]">
                 <img
                   src={HERO_IMAGE}
                   alt="Legalization and attestation service"
-                  className="h-full w-full object-cover object-center"
+                  className="h-full w-full object-cover object-[50%_45%]"
                 />
               </div>
             </div>

@@ -76,9 +76,9 @@ export function GlobalPayrollSolutionsPage() {
     <main className="service-page service-global-payroll flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
       <section className="bg-background">
         <div className="mx-auto w-full max-w-[1440px] px-4 py-12 sm:px-6 sm:py-16 lg:px-[80px] lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_500px] lg:items-center lg:gap-0">
-            <div className="relative z-10 min-w-0 pl-[40px] lg:overflow-x-auto max-md:pl-0">
-              <h1 className="w-max max-w-none font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] text-[#2899E6] sm:text-[48px] md:text-[56px] lg:text-[80px] lg:whitespace-nowrap max-md:w-full max-md:max-w-full max-md:text-[28px] max-md:leading-[1.3] max-md:whitespace-normal">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-center lg:gap-0">
+            <div className="relative z-10 min-w-0 pl-[40px] lg:pr-10 max-md:pl-0">
+              <h1 className="w-full max-w-[760px] font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] text-[#2899E6] sm:text-[48px] md:text-[56px] lg:text-[80px] max-md:text-[28px] max-md:leading-[1.3]">
                 Global Payroll Services
               </h1>
               <p className="mt-6 w-full max-w-[542px] font-['Plus_Jakarta_Sans'] text-[18px] font-normal leading-[150%] tracking-[0] text-[#0B1F2DCC] sm:text-[20px] lg:text-[24px] max-md:text-[15px] max-md:leading-[1.5]">
@@ -88,15 +88,15 @@ export function GlobalPayrollSolutionsPage() {
                 international jurisdictions.
               </p>
             </div>
-            <div className="relative z-0 flex w-full min-w-0 justify-center lg:-translate-x-[144px] lg:justify-end">
-              <div className="relative aspect-[683/371] w-full max-w-[500px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[272px] lg:w-[500px] lg:shrink-0">
+            <div className="relative z-0 flex w-full min-w-0 justify-center lg:-translate-x-[80px] lg:justify-end">
+              <div className="relative aspect-[683/371] w-full max-w-[560px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[304px] lg:w-[560px] lg:shrink-0">
                 <Image
-                  src="/images/global-payroll-hero.png"
+                  src="/images/service-hero-3.png"
                   alt="Professionals collaborating on global payroll services"
-                  width={500}
-                  height={272}
-                  sizes="(max-width: 1024px) 100vw, 500px"
-                  className="h-full w-full object-cover object-center"
+                  width={560}
+                  height={304}
+                  sizes="(max-width: 1024px) 100vw, 560px"
+                  className="h-full w-full object-cover object-[50%_45%]"
                   priority
                 />
               </div>

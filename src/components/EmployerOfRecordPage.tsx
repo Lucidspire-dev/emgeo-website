@@ -108,9 +108,9 @@ export function EmployerOfRecordPage() {
             <div className="relative flex w-full min-w-0 justify-center lg:justify-end">
               <div className="relative aspect-[683/371] w-full max-w-[500px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[272px] lg:w-[500px]">
                 <img
-                  src="https://emgeo.lucidspire.com/wp-content/uploads/2026/02/h3.png"
+                  src="/images/service-hero-1.png"
                   alt="Employer of Record service"
-                  className="h-full w-full object-cover object-center"
+                  className="h-full w-full object-cover object-[50%_42%]"
                 />
               </div>
             </div>

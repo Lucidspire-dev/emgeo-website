@@ -10,42 +10,42 @@ const servicePanels = [
     description:
       "Expand globally without legal entities. Emgeo's Employer of Record solutions handle hiring, onboarding, compliance, and payroll, empowering enterprises to build international teams quickly, compliantly, and cost-effectively across 160+ countries.",
     href: "/services/employer-of-record",
-    imageSrc: "/images/service-home-1.png",
+    imageSrc: "/images/service-home-1-v3.png",
   },
   {
     title: "Immigration and Compliance",
     description:
       "Simplify global mobility and compliance challenges. Emgeo provides expert visa support, work permits, immigration solutions, and ongoing compliance monitoring - ensuring organizations move talent seamlessly, stay compliant, and succeed in new markets.",
     href: "/services/immigration-and-compliance",
-    imageSrc: "/images/service-home-2.png",
+    imageSrc: "/images/service-home-2-v3.png",
   },
   {
     title: "Global Payroll Solutions",
     description:
       "Eliminate payroll complexity with Emgeo's global payroll services. We ensure accurate, compliant, multi-currency salary processing, automate taxes, and reduce payroll errors, enabling enterprises to focus on growth while we manage workforce payments seamlessly.",
     href: "/services/global-payroll-solutions",
-    imageSrc: "/images/service-home-3.png",
+    imageSrc: "/images/service-home-3-v3.png",
   },
   {
     title: "Recruitment & Contractors",
     description:
       "Overcome talent shortages and project delays. Emgeo connects enterprises with pre-vetted global professionals and contractors, delivering skilled teams in weeks, ensuring flexibility, scalability, and alignment with critical business requirements worldwide.",
     href: "/services/recruitment-and-contractors",
-    imageSrc: "/images/service-home-4.png",
+    imageSrc: "/images/service-home-4-v3.png",
   },
   {
     title: "Legalization and Attestation Support",
     description:
       "Expand globally without legal entities. Emgeo's Employer of Record solutions handle hiring, onboarding, compliance, and payroll, empowering enterprises to build international teams quickly, compliantly, and cost-effectively across 160+ countries.",
     href: "/services/legalization-and-attestation-support",
-    imageSrc: "/images/service-home-5.png",
+    imageSrc: "/images/service-home-5-v3.png",
   },
   {
     title: "Relocation and Destination Services",
     description:
       "Expand globally without legal entities. Emgeo's Employer of Record solutions handle hiring, onboarding, compliance, and payroll, empowering enterprises to build international teams quickly, compliantly, and cost-effectively across 160+ countries.",
     href: "/services/relocation-and-destination-services",
-    imageSrc: "/images/service-home-6.png",
+    imageSrc: "/images/service-home-6-v3.png",
   },
 ];
 

@@ -8,8 +8,7 @@ import { FaqSectionTitle } from "./FaqSectionTitle";
 import { HowItWorksAccordion } from "./HowItWorksAccordion";
 import { ServiceHelpsYouSection } from "./ServiceHelpsYouSection";
 
-const HERO_IMAGE =
-  "https://emgeo.lucidspire.com/wp-content/uploads/2026/03/Screenshot-from-2026-03-02-12-44-42.png";
+const HERO_IMAGE = "/images/service-hero-4.png";
 
 const timelineSteps = [
   {
@@ -135,7 +134,7 @@ export function RecruitmentAndContractorsPage() {
                   src={HERO_IMAGE}
                   alt="Recruitment and contractors service"
                   fill
-                  className="object-cover object-center"
+                  className="object-cover object-[50%_40%]"
                   sizes="(min-width: 1024px) 620px, 100vw"
                   priority
                 />
