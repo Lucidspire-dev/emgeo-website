@@ -98,7 +98,7 @@ export function RelocationAndDestinationServicesPage() {
         <Container className="pt-12 pb-6 sm:pt-16 sm:pb-8 lg:pt-20 lg:pb-8">
           <div className="relative">
             <div className="relative mx-auto aspect-[1238/457] w-full max-w-[1238px] overflow-hidden rounded-[24px] bg-white">
-              <Image src={HERO_IMAGE} alt="Relocation and destination services" fill className="object-cover object-top" sizes="(min-width: 1280px) 1238px, 100vw" priority />
+              <Image src={HERO_IMAGE} alt="Relocation and destination services" fill className="object-cover object-[50%_18%]" sizes="(min-width: 1280px) 1238px, 100vw" priority />
             </div>
             <div className="relative z-10 mx-auto -mt-[66px] w-full max-w-[980px] rounded-[24px] bg-white p-6 sm:-mt-[82px] sm:p-8 lg:-mt-[256px] lg:ml-[-25px] lg:max-w-[900px] lg:p-10">
               <h1 className="align-middle font-['Darker_Grotesque'] text-[44px] font-bold leading-[110%] tracking-[0] [leading-trim:none] text-[#2899E6] sm:text-[60px] lg:text-[80px] max-md:text-[28px] max-md:leading-[1.3]">

@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { services } from "../../../lib/services";
 import { EmployerOfRecordPage } from "../../../components/EmployerOfRecordPage";
 import { GlobalPayrollSolutionsPage } from "../../../components/GlobalPayrollSolutionsPage";
@@ -13,6 +13,15 @@ export default async function ServiceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
+  // Handle common typo variants of relocation slug to avoid 404 on shared links.
+  if (
+    slug === "relocation-and-destination-servives" ||
+    slug === "relocation-and-destination-service"
+  ) {
+    redirect("/services/relocation-and-destination-services");
+  }
+
   const service = services.find((s) => s.slug === slug);
   if (!service) return notFound();
 
