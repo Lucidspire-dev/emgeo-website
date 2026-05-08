@@ -8,7 +8,7 @@ import { FaqSectionTitle } from "./FaqSectionTitle";
 import { HowItWorksAccordion } from "./HowItWorksAccordion";
 import { ServiceHelpsYouSection } from "./ServiceHelpsYouSection";
 
-const HERO_IMAGE = "/images/service-hero-6.png";
+const HERO_IMAGE = "/images/service-hero-6-v2.png";
 
 const processSteps = [
   {
