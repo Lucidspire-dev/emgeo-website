@@ -10,14 +10,15 @@ type HeroSectionProps = {
 };
 
 export function HeroSection({
-  imageSrc = "/images/hero-team-clean.png",
-  imageAlt = "Team collaboration",
+  imageSrc = "/images/hero-slide-1-designed.png",
+  imageAlt = "Business professional reviewing reports",
 }: HeroSectionProps) {
   const slides = useMemo(
     () => [
       {
         imageSrc,
         imageAlt,
+        imageObjectPosition: "center center",
         headingLine1: { text: "Unlocking Talent Potential", color: "#2899E6" },
         headingLine2: { text: "Across 160 Countries", color: "#0F3D5C" },
         subtext:
@@ -57,8 +58,9 @@ export function HeroSection({
         },
       },
       {
-        imageSrc: "/images/hero-team-3.png",
-        imageAlt: "Visa and permit support team",
+        imageSrc: "/images/hero-slide-2-designed.png",
+        imageAlt: "Approved visa application process",
+        imageObjectPosition: "55% center",
         headingLine1: { text: "One partner", color: "#2899E6" },
         headingLine2: { text: "for end-to-end workforce solution", color: "#0F3D5C" },
         subtext:
@@ -276,13 +278,14 @@ export function HeroSection({
                           />
                         </div>
 
-                        <div className="relative mx-auto mt-2 w-full max-w-[min(100%,360px)] overflow-hidden rounded-[12px] lg:absolute lg:left-[204px] lg:mx-0 lg:mt-0 lg:h-[431px] lg:w-[413px] lg:max-w-none lg:translate-x-0 lg:transition-transform lg:duration-700 lg:ease-out lg:hover:-translate-y-1 lg:top-[142px]">
+                        <div className="relative mx-auto mt-2 w-full max-w-[min(100%,360px)] overflow-hidden rounded-[12px] bg-white lg:absolute lg:left-[204px] lg:mx-0 lg:mt-0 lg:h-[431px] lg:w-[413px] lg:max-w-none lg:translate-x-0 lg:transition-transform lg:duration-700 lg:ease-out lg:hover:-translate-y-1 lg:top-[142px]">
                           <Image
                             src={slide.imageSrc}
                             alt={slide.imageAlt}
                             width={1200}
                             height={900}
-                            className="h-auto w-full object-cover lg:h-full"
+                              className="h-auto w-full object-cover lg:h-full"
+                            style={{ objectPosition: slide.imageObjectPosition }}
                             priority={index === 0}
                           />
                           <div className="absolute bottom-2 left-3 z-30 translate-x-[60px] lg:hidden">
@@ -352,13 +355,14 @@ export function HeroSection({
                               {slide.sideCard.label}
                             </div>
                           </div>
-                          <div className="relative mx-auto w-full max-w-[min(100%,360px)] overflow-hidden rounded-[12px]">
+                          <div className="relative mx-auto w-full max-w-[min(100%,360px)] overflow-hidden rounded-[12px] bg-white">
                             <Image
                               src={slide.imageSrc}
                               alt={slide.imageAlt}
                               width={413}
                               height={433}
                               className="h-auto w-full object-cover"
+                              style={{ objectPosition: slide.imageObjectPosition }}
                               priority={index === 1}
                             />
                             <div className="absolute bottom-2 left-3 z-30 translate-x-[60px]">
@@ -410,13 +414,14 @@ export function HeroSection({
                             {slide.badge.text}
                           </div>
 
-                          <div className="relative z-10 h-full w-full overflow-hidden rounded-[12px]">
+                          <div className="relative z-10 h-full w-full overflow-hidden rounded-[12px] bg-white">
                             <Image
                               src={slide.imageSrc}
                               alt={slide.imageAlt}
                               width={413}
                               height={433}
                               className="h-full w-full object-cover"
+                              style={{ objectPosition: slide.imageObjectPosition }}
                               priority={index === 1}
                             />
                           </div>
