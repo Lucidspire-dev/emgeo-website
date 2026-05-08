@@ -17,21 +17,21 @@ const LEADERS: LeadershipEntry[] = [
   {
     name: "Guruprasad G",
     role: "Co-Founder & Executive Director",
-    image: "/images/leaders/guruprasad.png",
+    image: "/images/leaders/guruprasad-v2.png",
     linkedinUrl: "https://www.linkedin.com/in/guruprasadg/",
     imageObjectPosition: "center top",
   },
   {
     name: "Raghavendra N",
     role: "Director & Co-Founder",
-    image: "/images/leaders/raghavendra.jpg",
+    image: "/images/leaders/raghavendra-v2.jpg",
     linkedinUrl: "https://www.linkedin.com/in/raghavendra-n-b6b7783a/",
     imageObjectPosition: "center top",
   },
   {
     name: "Dhiren Sampat",
     role: "Chief Executive Officer",
-    image: "/images/leaders/dhiren-sampat.png",
+    image: "/images/leaders/dhiren-sampat-v2.png",
     linkedinUrl: "https://www.linkedin.com/in/dhiren-sampat-0b16655/",
   },
 ];
