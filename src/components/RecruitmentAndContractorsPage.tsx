@@ -115,7 +115,7 @@ export function RecruitmentAndContractorsPage() {
       <section className="bg-background">
         <Container className="pt-12 pb-6 sm:pt-16 sm:pb-8 lg:pt-20 lg:pb-6">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_620px] lg:items-center lg:gap-0">
-            <div className="min-w-0 pl-[40px] max-md:pl-0">
+            <div className="min-w-0 pl-[40px] sm:-translate-y-3 lg:-translate-y-5 max-md:pl-0">
               <h1 className="align-middle font-['Darker_Grotesque'] text-[44px] font-bold leading-[110%] tracking-[0] [leading-trim:none] text-[#2899E6] sm:text-[60px] lg:text-[80px] max-md:text-[28px] max-md:leading-[1.3]">
                 Recruitment and Contractors
               </h1>
@@ -124,17 +124,17 @@ export function RecruitmentAndContractorsPage() {
                 permanent employees and specialized contractors across global
                 markets with speed and full regulatory compliance. We simplify
                 cross-border hiring through compliant engagement models
-                eliminating the need for local entity setup
+                eliminating the need for local entity setup.
               </p>
             </div>
 
             <div className="relative flex w-full min-w-0 justify-center lg:-mt-[30px] lg:justify-end">
-              <div className="relative aspect-[1182/714] w-full max-w-[620px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[380px] lg:w-[620px]">
+              <div className="relative aspect-[1182/714] w-full max-w-[620px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[420px] lg:w-[620px]">
                 <Image
                   src={HERO_IMAGE}
                   alt="Recruitment and contractors service"
                   fill
-                  className="object-cover object-[50%_40%]"
+                  className="object-cover object-[50%_52%]"
                   sizes="(min-width: 1024px) 620px, 100vw"
                   priority
                 />

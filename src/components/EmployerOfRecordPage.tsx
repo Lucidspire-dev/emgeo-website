@@ -93,7 +93,7 @@ export function EmployerOfRecordPage() {
     <main className="service-page service-employer-of-record flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
       <section className="bg-background">
         <Container className="pt-12 pb-6 sm:pt-16 sm:pb-8 lg:pt-20 lg:pb-6">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_500px] lg:items-center lg:gap-0">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-center lg:gap-0">
             <div className="min-w-0 pl-[40px] max-md:pl-0">
               <h1 className="align-middle font-['Darker_Grotesque'] text-[44px] font-bold leading-[110%] tracking-[0] [leading-trim:none] text-[#2899E6] sm:text-[60px] lg:text-[80px] max-md:text-[28px] max-md:leading-[1.3]">
                 Employer of Record (EOR)
@@ -106,9 +106,9 @@ export function EmployerOfRecordPage() {
               </p>
             </div>
             <div className="relative flex w-full min-w-0 justify-center lg:justify-end">
-              <div className="relative aspect-[683/371] w-full max-w-[500px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[272px] lg:w-[500px]">
+              <div className="relative aspect-[683/371] w-full max-w-[560px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[360px] lg:w-[560px]">
                 <img
-                  src="/images/service-hero-1.png"
+                  src="/images/service-hero-1-v2.png"
                   alt="Employer of Record service"
                   className="h-full w-full object-cover object-[50%_42%]"
                 />

@@ -263,6 +263,16 @@ export function HeroSection({
                           </div>
                         </div>
 
+                        <div className="relative z-30 -mb-4 ml-auto mr-5 mt-12 h-[56px] w-[56px] translate-y-[34px] lg:hidden">
+                          <Image
+                            src={slide.icon.src}
+                            alt={slide.icon.alt}
+                            width={56}
+                            height={56}
+                            className="h-[56px] w-[56px]"
+                          />
+                        </div>
+
                         <div
                           className={`absolute z-30 hidden lg:block ${slide.icon.pos}`}
                         >
@@ -354,6 +364,15 @@ export function HeroSection({
                             >
                               {slide.sideCard.label}
                             </div>
+                          </div>
+                          <div className="relative z-30 -mb-4 ml-5 mt-12 h-[56px] w-[56px] -translate-x-[10px] translate-y-[27px]">
+                            <Image
+                              src={slide.icon.src}
+                              alt={slide.icon.alt}
+                              width={56}
+                              height={56}
+                              className="h-[56px] w-[56px]"
+                            />
                           </div>
                           <div className="relative mx-auto w-full max-w-[min(100%,360px)] overflow-hidden rounded-[12px] bg-white">
                             <Image

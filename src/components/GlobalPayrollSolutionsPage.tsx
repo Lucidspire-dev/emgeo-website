@@ -75,26 +75,26 @@ export function GlobalPayrollSolutionsPage() {
   return (
     <main className="service-page service-global-payroll flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
       <section className="bg-background">
-        <div className="mx-auto w-full max-w-[1440px] px-4 py-12 sm:px-6 sm:py-16 lg:px-[80px] lg:py-20">
+        <Container className="pt-12 pb-6 sm:pt-16 sm:pb-8 lg:pt-20 lg:pb-6">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-center lg:gap-0">
-            <div className="relative z-10 min-w-0 pl-[40px] lg:pr-10 max-md:pl-0">
-              <h1 className="w-full max-w-[760px] font-['Darker_Grotesque'] text-[40px] font-bold leading-[110%] tracking-[0] text-[#2899E6] sm:text-[48px] md:text-[56px] lg:text-[80px] max-md:text-[28px] max-md:leading-[1.3]">
+            <div className="min-w-0 pl-[40px] max-md:pl-0">
+              <h1 className="align-middle font-['Darker_Grotesque'] text-[44px] font-bold leading-[110%] tracking-[0] [leading-trim:none] text-[#2899E6] sm:text-[60px] lg:text-[80px] max-md:text-[28px] max-md:leading-[1.3]">
                 Global Payroll Services
               </h1>
-              <p className="mt-6 w-full max-w-[542px] font-['Plus_Jakarta_Sans'] text-[18px] font-normal leading-[150%] tracking-[0] text-[#0B1F2DCC] sm:text-[20px] lg:text-[24px] max-md:text-[15px] max-md:leading-[1.5]">
+              <p className="mt-6 w-full max-w-[720px] align-middle font-['Plus_Jakarta_Sans'] text-[18px] font-normal leading-[150%] tracking-[0] [leading-trim:none] text-[#0B1F2DCC] sm:text-[24px] max-md:text-[15px] max-md:leading-[1.5]">
                 Emgeo Global delivers structured global payroll services that
                 ensure employees are paid accurately and on time, while
                 safeguarding organisations from compliance risks across
                 international jurisdictions.
               </p>
             </div>
-            <div className="relative z-0 flex w-full min-w-0 justify-center lg:-translate-x-[80px] lg:justify-end">
-              <div className="relative aspect-[683/371] w-full max-w-[560px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[304px] lg:w-[560px] lg:shrink-0">
+            <div className="relative flex w-full min-w-0 justify-center lg:justify-end">
+              <div className="relative aspect-[683/371] w-full max-w-[560px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[360px] lg:w-[560px]">
                 <Image
                   src="/images/service-hero-3.png"
                   alt="Professionals collaborating on global payroll services"
                   width={560}
-                  height={304}
+                  height={360}
                   sizes="(max-width: 1024px) 100vw, 560px"
                   className="h-full w-full object-cover object-[50%_45%]"
                   priority
@@ -102,7 +102,7 @@ export function GlobalPayrollSolutionsPage() {
               </div>
             </div>
           </div>
-        </div>
+        </Container>
       </section>
 
       <section className="bg-background">

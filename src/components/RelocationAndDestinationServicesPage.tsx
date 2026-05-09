@@ -8,7 +8,7 @@ import { FaqSectionTitle } from "./FaqSectionTitle";
 import { HowItWorksAccordion } from "./HowItWorksAccordion";
 import { ServiceHelpsYouSection } from "./ServiceHelpsYouSection";
 
-const HERO_IMAGE = "/images/service-hero-6-v2.png";
+const HERO_IMAGE = "/images/service-hero-6-v3.png";
 
 const processSteps = [
   {
@@ -96,18 +96,27 @@ export function RelocationAndDestinationServicesPage() {
     <main className="service-page service-relocation-and-destination-services flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
       <section className="bg-background">
         <Container className="pt-12 pb-6 sm:pt-16 sm:pb-8 lg:pt-20 lg:pb-8">
-          <div className="relative">
-            <div className="relative mx-auto aspect-[1238/457] w-full max-w-[1238px] overflow-hidden rounded-[24px] bg-white">
-              <Image src={HERO_IMAGE} alt="Relocation and destination services" fill className="object-cover object-[50%_18%]" sizes="(min-width: 1280px) 1238px, 100vw" priority />
-            </div>
-            <div className="relative z-10 mx-auto -mt-[66px] w-full max-w-[980px] rounded-[24px] bg-white p-6 sm:-mt-[82px] sm:p-8 lg:-mt-[256px] lg:ml-[-25px] lg:max-w-[900px] lg:p-10">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-center lg:gap-0">
+            <div className="min-w-0 pl-[40px] max-md:pl-0">
               <h1 className="align-middle font-['Darker_Grotesque'] text-[44px] font-bold leading-[110%] tracking-[0] [leading-trim:none] text-[#2899E6] sm:text-[60px] lg:text-[80px] max-md:text-[28px] max-md:leading-[1.3]">
-                Relocation and Destination Services
+                Relocation and Destination
               </h1>
-              <p className="mt-4 align-middle font-['Plus_Jakarta_Sans'] text-[18px] font-normal leading-[150%] tracking-[0] [leading-trim:none] text-[#0B1F2DCC] sm:text-[24px] max-md:text-[15px] max-md:leading-[1.5]">
+              <p className="mt-6 w-full max-w-[720px] align-middle font-['Plus_Jakarta_Sans'] text-[18px] font-normal leading-[150%] tracking-[0] [leading-trim:none] text-[#0B1F2DCC] sm:text-[24px] max-md:text-[15px] max-md:leading-[1.5]">
                 Emgeo Global delivers structured, country-specific destination
                 support through an experienced global partner network.
               </p>
+            </div>
+            <div className="relative flex w-full min-w-0 justify-center lg:justify-end">
+              <div className="relative aspect-[683/371] w-full max-w-[560px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[360px] lg:w-[560px]">
+                <Image
+                  src={HERO_IMAGE}
+                  alt="Relocation and destination services"
+                  fill
+                  className="object-cover object-[50%_18%]"
+                  sizes="(min-width: 1024px) 560px, 100vw"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </Container>

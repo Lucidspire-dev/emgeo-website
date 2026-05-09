@@ -3,13 +3,18 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const STATS = [
-  { target: 10000, label: "Candidates Placed", suffix: "+" },
-  { target: 150, label: "Operating Countries", suffix: "+" },
-  { target: 10000, label: "Candidates Placed", suffix: "+" },
-  { target: 10000, label: "Candidates Placed", suffix: "+" },
+  { target: 1200, label: "Candidates Placed", suffix: "+", decimals: 0 },
+  { target: 99.7, label: "Success Rate", suffix: "%", decimals: 1 },
+  { target: 160, label: "Countries Supported", suffix: "+", decimals: 0 },
+  { target: 70, label: "Companies That Trust Us", suffix: "+", decimals: 0 },
 ] as const;
 
-function useCountUp(target: number, start: boolean, duration = 1300) {
+function useCountUp(
+  target: number,
+  start: boolean,
+  decimals = 0,
+  duration = 1300,
+) {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
@@ -20,7 +25,9 @@ function useCountUp(target: number, start: boolean, duration = 1300) {
     const tick = (now: number) => {
       const progress = Math.min((now - startTs) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(target * eased));
+      const scaled = target * eased;
+      const precision = Math.pow(10, decimals);
+      setValue(Math.round(scaled * precision) / precision);
       if (progress < 1) frameId = requestAnimationFrame(tick);
     };
 
@@ -35,17 +42,23 @@ function StatCard({
   target,
   label,
   suffix,
+  decimals,
   start,
 }: {
   target: number;
   label: string;
   suffix: string;
+  decimals: number;
   start: boolean;
 }) {
-  const current = useCountUp(target, start);
+  const current = useCountUp(target, start, decimals);
   const display = useMemo(
-    () => `${current.toLocaleString("en-US")}${suffix}`,
-    [current, suffix],
+    () =>
+      `${current.toLocaleString("en-US", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      })}${suffix}`,
+    [current, decimals, suffix],
   );
 
   return (
@@ -87,6 +100,7 @@ export function AboutStatsCounters() {
           target={s.target}
           label={s.label}
           suffix={s.suffix}
+          decimals={s.decimals}
           start={start}
         />
       ))}

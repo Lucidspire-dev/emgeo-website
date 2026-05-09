@@ -257,26 +257,32 @@ export function SiteFooter() {
 
         <div className="mt-6 border-t border-white/20 pt-5">
           <div className="flex flex-wrap items-center justify-center gap-6 text-white">
-            <a href="https://in.linkedin.com/company/emgeo-global-solutions-pvt-ltd" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-white/95 hover:text-white">
+            <a
+              href="https://in.linkedin.com/company/emgeo-global-solutions-pvt-ltd"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="text-white/95 hover:text-white"
+            >
               <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current" aria-hidden>
                 <path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5ZM.5 8h4V23h-4V8Zm7 0h3.83v2.05h.05c.53-1.01 1.85-2.05 3.8-2.05 4.06 0 4.82 2.67 4.82 6.14V23h-4v-7.35c0-1.75-.03-4-2.44-4-2.45 0-2.82 1.91-2.82 3.87V23h-4V8Z" />
               </svg>
             </a>
-            <a href="#" aria-label="Instagram" className="text-white/95 hover:text-white">
+            <span aria-label="Instagram" className="text-white/95">
               <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current" aria-hidden>
                 <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm-.12 2A3.63 3.63 0 0 0 4 7.63v8.74A3.63 3.63 0 0 0 7.63 20h8.74A3.63 3.63 0 0 0 20 16.37V7.63A3.63 3.63 0 0 0 16.37 4H7.63Zm9.62 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
               </svg>
-            </a>
-            <a href="#" aria-label="X" className="text-white/95 hover:text-white">
+            </span>
+            <span aria-label="X" className="text-white/95">
               <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current" aria-hidden>
                 <path d="M18.9 2H22l-6.78 7.75L23.2 22h-6.26l-4.9-6.41L6.43 22H3.31l7.25-8.3L.8 2h6.36l4.42 5.84L18.9 2Zm-1.1 18h1.72L6.24 3.9H4.4L17.8 20Z" />
               </svg>
-            </a>
-            <a href="#" aria-label="Facebook" className="text-white/95 hover:text-white">
+            </span>
+            <span aria-label="Facebook" className="text-white/95">
               <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current" aria-hidden>
                 <path d="M13.5 22v-8.2h2.77l.42-3.2H13.5V8.55c0-.93.27-1.55 1.64-1.55h1.75V4.14A24.5 24.5 0 0 0 14.3 4C11.74 4 10 5.5 10 8.27v2.33H7.25v3.2H10V22h3.5Z" />
               </svg>
-            </a>
+            </span>
           </div>
           <p className="mt-5 text-center font-['Plus_Jakarta_Sans'] text-[16px] leading-[130%] font-medium tracking-[0] text-white/75">
             Copyrights reserved 2026
@@ -355,26 +361,32 @@ export function SiteFooter() {
             Copyrights reserved 2026
           </div>
           <div className="flex items-center gap-4 text-white">
-            <a href="https://in.linkedin.com/company/emgeo-global-solutions-pvt-ltd" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-white/95 hover:text-white">
+            <a
+              href="https://in.linkedin.com/company/emgeo-global-solutions-pvt-ltd"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="text-white/95 hover:text-white"
+            >
               <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current" aria-hidden>
                 <path d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.11 1 2.49 1s2.49 1.12 2.49 2.5ZM.5 8h4V23h-4V8Zm7 0h3.83v2.05h.05c.53-1.01 1.85-2.05 3.8-2.05 4.06 0 4.82 2.67 4.82 6.14V23h-4v-7.35c0-1.75-.03-4-2.44-4-2.45 0-2.82 1.91-2.82 3.87V23h-4V8Z" />
               </svg>
             </a>
-            <a href="#" aria-label="Instagram" className="text-white/95 hover:text-white">
+            <span aria-label="Instagram" className="text-white/95">
               <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current" aria-hidden>
                 <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm-.12 2A3.63 3.63 0 0 0 4 7.63v8.74A3.63 3.63 0 0 0 7.63 20h8.74A3.63 3.63 0 0 0 20 16.37V7.63A3.63 3.63 0 0 0 16.37 4H7.63Zm9.62 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" />
               </svg>
-            </a>
-            <a href="#" aria-label="X" className="text-white/95 hover:text-white">
+            </span>
+            <span aria-label="X" className="text-white/95">
               <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current" aria-hidden>
                 <path d="M18.9 2H22l-6.78 7.75L23.2 22h-6.26l-4.9-6.41L6.43 22H3.31l7.25-8.3L.8 2h6.36l4.42 5.84L18.9 2Zm-1.1 18h1.72L6.24 3.9H4.4L17.8 20Z" />
               </svg>
-            </a>
-            <a href="#" aria-label="Facebook" className="text-white/95 hover:text-white">
+            </span>
+            <span aria-label="Facebook" className="text-white/95">
               <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current" aria-hidden>
                 <path d="M13.5 22v-8.2h2.77l.42-3.2H13.5V8.55c0-.93.27-1.55 1.64-1.55h1.75V4.14A24.5 24.5 0 0 0 14.3 4C11.74 4 10 5.5 10 8.27v2.33H7.25v3.2H10V22h3.5Z" />
               </svg>
-            </a>
+            </span>
           </div>
         </div>
       </div>

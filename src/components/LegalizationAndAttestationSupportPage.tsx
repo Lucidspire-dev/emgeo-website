@@ -95,10 +95,10 @@ export function LegalizationAndAttestationSupportPage() {
     <main className="service-page service-legalization-and-attestation-support flex min-w-0 max-w-full flex-col overflow-x-hidden md:overflow-x-visible">
       <section className="bg-background">
         <Container className="pt-12 pb-6 sm:pt-16 sm:pb-8 lg:pt-20 lg:pb-6">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_500px] lg:items-center lg:gap-0">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-center lg:gap-0">
             <div className="min-w-0 pl-[40px] max-md:pl-0">
               <h1 className="align-middle font-['Darker_Grotesque'] text-[44px] font-bold leading-[110%] tracking-[0] [leading-trim:none] text-[#2899E6] sm:text-[60px] lg:text-[80px] max-md:text-[28px] max-md:leading-[1.3]">
-                Legalization and Attestation Services
+                Legalization and Attestation
               </h1>
               <p className="mt-6 w-full max-w-[720px] align-middle font-['Plus_Jakarta_Sans'] text-[18px] font-normal leading-[150%] tracking-[0] [leading-trim:none] text-[#0B1F2DCC] sm:text-[24px] max-md:text-[15px] max-md:leading-[1.5]">
                 Emgeo Global manages the complete documentation lifecycle,
@@ -107,11 +107,11 @@ export function LegalizationAndAttestationSupportPage() {
               </p>
             </div>
             <div className="relative flex w-full min-w-0 justify-center lg:justify-end">
-              <div className="relative aspect-[1366/742] w-full max-w-[500px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[320px] lg:w-[500px]">
+              <div className="relative aspect-[683/371] w-full max-w-[560px] overflow-hidden rounded-[24px] bg-white lg:aspect-auto lg:h-[360px] lg:w-[560px]">
                 <img
                   src={HERO_IMAGE}
                   alt="Legalization and attestation service"
-                  className="h-full w-full object-cover object-[50%_45%]"
+                  className="h-full w-full object-cover object-[50%_42%]"
                 />
               </div>
             </div>

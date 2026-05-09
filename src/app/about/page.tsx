@@ -7,7 +7,7 @@ import { ConnectWithUsSection } from "../../components/ConnectWithUsForm";
 import { Container } from "../../components/Container";
 import { GlobalPresenceMap } from "../../components/GlobalPresenceMap";
 
-const HERO_IMAGE = "/images/about-hero-new.png";
+const HERO_IMAGE = "/images/about-hero-new-v2.png";
 const STAND_FOR_MISSION_IMAGE = "/images/about-standfor-mission-new.png";
 const STAND_FOR_VISION_IMAGE = "/images/about-standfor-vision-new.png";
 

@@ -3,8 +3,7 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
-const HERO_BG =
-  "https://emgeo.lucidspire.com/wp-content/uploads/2026/01/3b892dbf6efff947d662e39f413d55abdf0ca1c8-1.png";
+const HERO_BG = "/images/contact-hero-new-v2.png";
 
 function ContactSubmitButton({ disabled }: { disabled: boolean }) {
   return (
@@ -63,14 +62,10 @@ export function ContactUsHeroSection() {
         alt=""
         fill
         priority
+        quality={100}
         className="object-cover object-center"
         sizes="100vw"
       />
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/45 to-black/60"
-        aria-hidden
-      />
-
       <div className="relative z-10 mx-auto flex w-full max-w-[1200px] min-w-0 flex-col items-center px-4 pb-24 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8 lg:pb-32 lg:pt-24">
         <h1 className="text-center align-middle font-['Darker_Grotesque'] text-[52px] font-bold leading-[120%] tracking-[0] text-[#FFFFFF] sm:text-[64px] lg:text-[80px] max-md:text-[28px] max-md:leading-[1.3]">
           Connect with us
