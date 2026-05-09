@@ -7,7 +7,7 @@ import { ConnectWithUsSection } from "../../components/ConnectWithUsForm";
 import { Container } from "../../components/Container";
 import { GlobalPresenceMap } from "../../components/GlobalPresenceMap";
 
-const HERO_IMAGE = "/images/about-hero-new-v2.png";
+const HERO_IMAGE = "/images/about-hero-new-v3.png";
 const STAND_FOR_MISSION_IMAGE = "/images/about-standfor-mission-new.png";
 const STAND_FOR_VISION_IMAGE = "/images/about-standfor-vision-new.png";
 
@@ -26,7 +26,6 @@ export default function AboutPage() {
                 className="object-cover object-center opacity-100"
                 sizes="(min-width: 1440px) 1440px, 100vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-black/20" />
               <h1 className="absolute bottom-6 left-4 right-4 max-w-[760px] font-['Darker_Grotesque'] text-[28px] font-bold leading-[1.35] tracking-[0] text-white max-md:pr-2 md:bottom-10 md:left-8 md:right-auto md:text-[52px] md:leading-[110%] lg:left-12 lg:text-[80px]">
                 25+ years of excellence
                 <br />
