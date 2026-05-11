@@ -25,7 +25,7 @@ export function HeroSection({
           "Trusted partner for EOR, Hiring, Payroll, Compliance, Mobility services",
         buttonText: "Contact Us",
         topCard: {
-          value: "250+",
+          value: "1200+",
           label: "employees onboarded",
           bg: "#F4E4FF",
           text: "#992AD2",
