@@ -22,7 +22,7 @@ export function HeroSection({
         headingLine1: { text: "Unlocking Talent Potential", color: "#2899E6" },
         headingLine2: { text: "Across 160 Countries", color: "#0F3D5C" },
         subtext:
-          "Trusted partner for EOR, Hiring, Payroll, Compliance, Mobility services",
+          "Trusted partner for EOR, Immigration & Work permits, Hiring, Payroll, Compliance, Mobility services",
         buttonText: "Contact Us",
         topCard: {
           value: "1200+",
