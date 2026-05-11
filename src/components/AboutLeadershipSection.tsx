@@ -23,7 +23,7 @@ const LEADERS: LeadershipEntry[] = [
   },
   {
     name: "Raghavendra N",
-    role: "Director & Co-Founder",
+    role: "Co-Founder & Executive Director",
     image: "/images/leaders/raghavendra-v2.jpg",
     linkedinUrl: "https://www.linkedin.com/in/raghavendra-n-b6b7783a/",
     imageObjectPosition: "center top",
