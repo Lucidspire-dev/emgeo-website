@@ -7,8 +7,8 @@ import { ConnectWithUsSection } from "../../components/ConnectWithUsForm";
 import { Container } from "../../components/Container";
 import { GlobalPresenceMap } from "../../components/GlobalPresenceMap";
 
-const HERO_IMAGE = "/images/about-hero-new-v3.png";
-const STAND_FOR_MISSION_IMAGE = "/images/about-standfor-mission-new.png";
+const HERO_IMAGE = "/images/about-hero-new-v4.png";
+const STAND_FOR_MISSION_IMAGE = "/images/about-standfor-mission-v3.png";
 const STAND_FOR_VISION_IMAGE = "/images/about-standfor-vision-new.png";
 
 export default function AboutPage() {
@@ -23,6 +23,7 @@ export default function AboutPage() {
                 alt="About Emgeo"
                 fill
                 priority
+                quality={100}
                 className="object-cover object-center opacity-100"
                 sizes="(min-width: 1440px) 1440px, 100vw"
               />
