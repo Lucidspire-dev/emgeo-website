@@ -26,10 +26,13 @@ export async function POST(request: Request) {
     await sendContactEmail(parsed.data);
   } catch (e) {
     if (e instanceof MailNotConfiguredError) {
+      console.warn(
+        "Contact form: email not configured (set SMTP_HOST, SMTP_USER, SMTP_PASS, CONTACT_MAIL_FROM).",
+      );
       return NextResponse.json(
         {
           error:
-            "Contact email is not configured. Set SMTP_HOST, SMTP_USER, SMTP_PASS, and CONTACT_MAIL_FROM on the server.",
+            "We couldn't send your message from this form. Please email us at operations@emgeoglobal.com and we'll respond shortly.",
         },
         { status: 503 },
       );
