@@ -2,16 +2,23 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { submitContactForm } from "../lib/submit-contact";
 
-function ConnectSubmitButton({ disabled }: { disabled: boolean }) {
+function ConnectSubmitButton({
+  disabled,
+  loading,
+}: {
+  disabled: boolean;
+  loading?: boolean;
+}) {
   return (
     <button
       type="submit"
-      disabled={disabled}
+      disabled={disabled || loading}
       className="inline-flex h-[44px] w-full max-w-[400px] items-center justify-between gap-2 rounded-[72px] border border-[#2F6F97] bg-white pl-5 pr-1 py-1 align-middle tracking-[0] text-[#0F3D5C] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-100 sm:h-[46px] sm:pl-6 md:h-[44px] md:w-[177px] md:max-w-none md:justify-start md:pl-[24px] md:pr-[4px] md:pt-[4px] md:pb-[4px]"
     >
       <span className="inline-flex h-full min-w-0 flex-1 items-center justify-start whitespace-nowrap align-middle text-left font-['Darker_Grotesque'] text-[16px] leading-[130%] font-bold tracking-[0] sm:text-[17px] md:w-[105px] md:flex-none md:justify-center md:text-[18px] md:text-center">
-        Submit Now
+        {loading ? "Sending…" : "Submit Now"}
       </span>
       <span className="inline-flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-full bg-[#1C4E71]">
         <span
@@ -38,6 +45,8 @@ export function ConnectWithUsForm() {
     | { type: "success"; text: string }
     | { type: "error"; text: string }
   >({ type: "idle" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
 
   const isValid = useMemo(() => {
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim());
@@ -55,8 +64,8 @@ export function ConnectWithUsForm() {
 
   return (
     <form
-      className="w-full"
-      onSubmit={(e) => {
+      className="relative w-full"
+      onSubmit={async (e) => {
         e.preventDefault();
         if (!isValid) {
           setStatus({
@@ -65,6 +74,23 @@ export function ConnectWithUsForm() {
           });
           return;
         }
+        setIsSubmitting(true);
+        setStatus({ type: "idle" });
+        const result = await submitContactForm({
+          source: "home-connect",
+          name: values.name.trim(),
+          company: values.company.trim(),
+          email: values.email.trim(),
+          phone: values.phone.trim(),
+          message: values.message.trim(),
+          honeypot,
+        });
+        setIsSubmitting(false);
+        if (result.ok === false) {
+          setStatus({ type: "error", text: result.error });
+          return;
+        }
+        setHoneypot("");
         setStatus({
           type: "success",
           text: "Thank you! Your message has been received. We will get back to you soon.",
@@ -78,6 +104,20 @@ export function ConnectWithUsForm() {
         });
       }}
     >
+      <div
+        className="pointer-events-none absolute -left-[9999px] h-px w-px overflow-hidden opacity-0"
+        aria-hidden="true"
+      >
+        <label htmlFor="home-connect-hp">Leave blank</label>
+        <input
+          id="home-connect-hp"
+          name="company_website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+        />
+      </div>
       <div className="grid grid-cols-1 gap-x-6 gap-y-3 md:grid-cols-2 md:gap-y-6">
         <input
           value={values.name}
@@ -138,7 +178,7 @@ export function ConnectWithUsForm() {
       ) : null}
 
       <div className="mt-4 flex justify-center sm:mt-6 md:justify-start lg:mt-4">
-        <ConnectSubmitButton disabled={!isValid} />
+        <ConnectSubmitButton disabled={!isValid} loading={isSubmitting} />
       </div>
     </form>
   );

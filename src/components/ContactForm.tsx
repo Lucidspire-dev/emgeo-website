@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { submitContactForm } from "../lib/submit-contact";
 
 export function ContactForm() {
   const [values, setValues] = useState({
@@ -8,6 +9,8 @@ export function ContactForm() {
     email: "",
     message: "",
   });
+  const [honeypot, setHoneypot] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<
     { type: "idle" } | { type: "success"; text: string } | { type: "error"; text: string }
   >({ type: "idle" });
@@ -19,8 +22,8 @@ export function ContactForm() {
 
   return (
     <form
-      className="grid gap-4"
-      onSubmit={(e) => {
+      className="relative grid gap-4"
+      onSubmit={async (e) => {
         e.preventDefault();
         if (!isValid) {
           setStatus({
@@ -30,7 +33,21 @@ export function ContactForm() {
           return;
         }
 
-        // Placeholder: wire this to your backend/email service later.
+        setIsSubmitting(true);
+        setStatus({ type: "idle" });
+        const result = await submitContactForm({
+          source: "contact-form",
+          name: values.name.trim(),
+          email: values.email.trim(),
+          message: values.message.trim(),
+          honeypot,
+        });
+        setIsSubmitting(false);
+        if (result.ok === false) {
+          setStatus({ type: "error", text: result.error });
+          return;
+        }
+        setHoneypot("");
         setStatus({
           type: "success",
           text: "Thank you! Your message has been received. We will get back to you soon.",
@@ -38,6 +55,20 @@ export function ContactForm() {
         setValues({ name: "", email: "", message: "" });
       }}
     >
+      <div
+        className="pointer-events-none absolute -left-[9999px] h-px w-px overflow-hidden opacity-0"
+        aria-hidden="true"
+      >
+        <label htmlFor="contact-form-hp">Leave blank</label>
+        <input
+          id="contact-form-hp"
+          name="company_website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+        />
+      </div>
       <div className="flex flex-col gap-1">
         <label htmlFor="name" className="text-sm font-semibold">
           Name
@@ -98,10 +129,10 @@ export function ContactForm() {
         </div>
         <button
           type="submit"
-          disabled={!isValid}
+          disabled={!isValid || isSubmitting}
           className="inline-flex h-11 items-center justify-center rounded-xl bg-foreground px-6 text-sm font-semibold text-background disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Send message
+          {isSubmitting ? "Sending…" : "Send message"}
         </button>
       </div>
     </form>

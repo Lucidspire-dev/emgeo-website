@@ -2,18 +2,25 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { submitContactForm } from "../lib/submit-contact";
 
 const HERO_BG = "/images/contact-hero-new-v2.png";
 
-function ContactSubmitButton({ disabled }: { disabled: boolean }) {
+function ContactSubmitButton({
+  disabled,
+  loading,
+}: {
+  disabled: boolean;
+  loading?: boolean;
+}) {
   return (
     <button
       type="submit"
-      disabled={disabled}
+      disabled={disabled || loading}
       className="flex h-[44px] min-h-[44px] min-w-[154px] items-center justify-between gap-2 rounded-[28px] bg-[#0F3D5C] py-1 pl-4 pr-1 align-middle tracking-[0] text-white shadow-[0_6px_18px_rgba(15,61,92,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0b2f48] hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-100 max-md:h-[48px] max-md:w-full max-md:min-w-0 max-md:py-1.5 max-md:pl-5 max-md:pr-2"
     >
       <span className="whitespace-nowrap font-['Darker_Grotesque'] text-[18px] font-bold leading-[130%] tracking-[0] max-md:text-[16px] max-md:leading-[1.4]">
-        Submit Now
+        {loading ? "Sending…" : "Submit Now"}
       </span>
       <span className="flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-full bg-white max-md:h-[34px] max-md:w-[34px]">
         <span
@@ -40,6 +47,8 @@ export function ContactUsHeroSection() {
     | { type: "success"; text: string }
     | { type: "error"; text: string }
   >({ type: "idle" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
 
   const isValid = useMemo(() => {
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim());
@@ -79,7 +88,7 @@ export function ContactUsHeroSection() {
           <div className="relative mx-auto box-border rounded-[32px] bg-[#FFFEFB] px-4 pb-8 pt-7 shadow-none sm:px-10 sm:pb-16 sm:pt-10 lg:min-h-[396px] lg:w-[832px] lg:px-[40px] lg:pt-[40px] lg:pr-[40px] lg:pb-[64px] lg:pl-[40px]">
             <form
               className="relative flex h-full w-full min-w-0 flex-col gap-3 max-md:gap-4"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 if (!isValid) {
                   setStatus({
@@ -88,6 +97,23 @@ export function ContactUsHeroSection() {
                   });
                   return;
                 }
+                setIsSubmitting(true);
+                setStatus({ type: "idle" });
+                const result = await submitContactForm({
+                  source: "contact-page",
+                  name: values.name.trim(),
+                  company: values.company.trim(),
+                  email: values.email.trim(),
+                  phone: values.phone.trim(),
+                  message: values.message.trim(),
+                  honeypot,
+                });
+                setIsSubmitting(false);
+                if (result.ok === false) {
+                  setStatus({ type: "error", text: result.error });
+                  return;
+                }
+                setHoneypot("");
                 setStatus({
                   type: "success",
                   text: "Thank you! Your message has been received. We will get back to you soon.",
@@ -101,6 +127,20 @@ export function ContactUsHeroSection() {
                 });
               }}
             >
+              <div
+                className="pointer-events-none absolute -left-[9999px] h-px w-px overflow-hidden opacity-0"
+                aria-hidden="true"
+              >
+                <label htmlFor="contact-page-hp">Leave blank</label>
+                <input
+                  id="contact-page-hp"
+                  name="company_website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
+              </div>
               <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-2 max-md:gap-4">
                 <input
                   value={values.name}
@@ -167,7 +207,10 @@ export function ContactUsHeroSection() {
               ) : null}
 
               <div className="mt-3 flex justify-center max-md:w-full">
-                <ContactSubmitButton disabled={!isValid} />
+                <ContactSubmitButton
+                  disabled={!isValid}
+                  loading={isSubmitting}
+                />
               </div>
             </form>
           </div>
