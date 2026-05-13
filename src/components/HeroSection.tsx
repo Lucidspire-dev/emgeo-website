@@ -19,10 +19,12 @@ export function HeroSection({
         imageSrc,
         imageAlt,
         imageObjectPosition: "center center",
-        headingLine1: { text: "Unlocking Talent Potential", color: "#2899E6" },
-        headingLine2: { text: "Across 160 Countries", color: "#0F3D5C" },
+        headingLine1: { text: "Unlocking Talent", color: "#2899E6" },
+        headingLine1b: { text: "Potential", color: "#2899E6" },
+        headingLine2Prefix: { text: "Across", color: "#0F3D5C" },
+        headingLine2: { text: "160 Countries", color: "#0F3D5C" },
         subtext:
-          "Trusted partner for EOR, Immigration & Work permits, Hiring, Payroll, Compliance and Mobility Services.",
+          "Trusted Partner for EOR, Immigration and Work Permits, Hiring, Payroll, Compliance and Mobility Services",
         buttonText: "Contact Us",
         topCard: {
           value: "1200+",
@@ -64,7 +66,7 @@ export function HeroSection({
         headingLine1: { text: "One partner", color: "#2899E6" },
         headingLine2: { text: "for end-to-end workforce solution", color: "#0F3D5C" },
         subtext:
-          "Helping you hire, move, manage, and retain talent across the globe",
+          "Helping You Hire, Move, Manage, and Retain Talent Across the Globe",
         buttonText: "Book a Demo",
         topCard: {
           value: "3,200+",
@@ -136,6 +138,23 @@ export function HeroSection({
                     <span style={{ color: slide.headingLine1.color }}>
                       {slide.headingLine1.text}
                     </span>
+                    {"headingLine1b" in slide && slide.headingLine1b ? (
+                      <>
+                        <br />
+                        <span style={{ color: slide.headingLine1b.color }}>
+                          {slide.headingLine1b.text}
+                        </span>
+                        {"headingLine2Prefix" in slide &&
+                        slide.headingLine2Prefix ? (
+                          <span
+                            style={{ color: slide.headingLine2Prefix.color }}
+                          >
+                            {" "}
+                            {slide.headingLine2Prefix.text}
+                          </span>
+                        ) : null}
+                      </>
+                    ) : null}
                     <br />
                     <span style={{ color: slide.headingLine2.color }}>
                       {slide.headingLine2.text}
